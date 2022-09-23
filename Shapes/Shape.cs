@@ -10,8 +10,8 @@ namespace Shapes
     internal abstract class Shape
     {
         protected int x, y;
-        static int radius;
-        static Color color;
+        protected static int radius;
+        protected static Color color;
 
         public abstract void Draw(Graphics g);
 
@@ -28,11 +28,20 @@ namespace Shapes
 
         static Circle()
         {
-
+            radius = 20;
+            color = Color.Green;
         }
         public override void Draw(Graphics g)
         {
-            
+            Brush brush = new SolidBrush(color);
+            Pen pen = new Pen(color, 5);
+            g.DrawLine(pen, x, y, x + radius, y + radius);
+            g.DrawEllipse(pen, 100, 100, radius, radius); //x - radius, y - radius, radius, radius
+        }
+
+        public override bool IsInside(int mouseX, int mouseY)
+        {
+            return true; //TODO: make isInside
         }
     }
 }

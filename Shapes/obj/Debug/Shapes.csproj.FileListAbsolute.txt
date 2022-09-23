@@ -1,0 +1,11 @@
+D:\ДЗ\Polygons\Shapes\bin\Debug\Shapes.exe.config
+D:\ДЗ\Polygons\Shapes\bin\Debug\Shapes.exe
+D:\ДЗ\Polygons\Shapes\bin\Debug\Shapes.pdb
+D:\ДЗ\Polygons\Shapes\obj\Debug\Shapes.csproj.AssemblyReference.cache
+D:\ДЗ\Polygons\Shapes\obj\Debug\Shapes.csproj.SuggestedBindingRedirects.cache
+D:\ДЗ\Polygons\Shapes\obj\Debug\Shapes.Form1.resources
+D:\ДЗ\Polygons\Shapes\obj\Debug\Shapes.Properties.Resources.resources
+D:\ДЗ\Polygons\Shapes\obj\Debug\Shapes.csproj.GenerateResource.cache
+D:\ДЗ\Polygons\Shapes\obj\Debug\Shapes.csproj.CoreCompileInputs.cache
+D:\ДЗ\Polygons\Shapes\obj\Debug\Shapes.exe
+D:\ДЗ\Polygons\Shapes\obj\Debug\Shapes.pdb

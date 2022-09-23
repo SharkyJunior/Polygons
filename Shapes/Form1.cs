@@ -12,17 +12,11 @@ namespace Shapes
 {
     public partial class Form1 : Form
     {
+        Shape[] shapes;
+
         public Form1()
         {
             InitializeComponent();
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            Graphics g = this.CreateGraphics();
-            Brush b = new SolidBrush(Color.Red);
-            Pen p = new Pen(b);
-            g.FillEllipse(b, 100, 100, 200, 200);
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -31,6 +25,19 @@ namespace Shapes
         }
 
         private void Form1_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+        private void Form1_MouseDown(object sender, MouseEventArgs e)
+        {
+            Graphics g = CreateGraphics();
+            textBox1.Text = Convert.ToString(Cursor.Position.X) + ' ' + Convert.ToString(Cursor.Position.Y);
+            Circle circle = new Circle(Cursor.Position.X, Cursor.Position.Y);
+            circle.Draw(g);
+            
+        }
+
+        private void Form1_MouseUp(object sender, MouseEventArgs e)
         {
 
         }
