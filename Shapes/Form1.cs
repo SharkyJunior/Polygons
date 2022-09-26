@@ -13,7 +13,6 @@ namespace Shapes
     public partial class Form1 : Form
     {
         List<Shape> shapes = new List<Shape>();
-        List<Shape> draggedShapes = new List<Shape>();
         bool isDragging = false;
         Graphics g;
 
@@ -43,10 +42,10 @@ namespace Shapes
                 {
                     if (shape.IsInside(e.X, e.Y))
                     {
+                        shape.isDragged = true;
                         isDragging = true;
                         shape.offsetX = e.X - shape.X;
                         shape.offsetY = e.Y - shape.Y;
-                        draggedShapes.Add(shape);
                     }
                 }
                 if (!isDragging)
@@ -55,23 +54,25 @@ namespace Shapes
             else if (e.Button == MouseButtons.Right)
                 shapes.Remove(shapes.Last());
 
-            Invalidate();
+            Refresh();
         }
 
         private void Form1_MouseUp(object sender, MouseEventArgs e)
         {
             isDragging = false;
-            draggedShapes.Clear();
-            Invalidate();
+            foreach (Shape shape in shapes) 
+                shape.isDragged = false;
+            Refresh();
         }
 
         private void Form1_MouseMove(object sender, MouseEventArgs e)
         {
             if (isDragging)
             {
-                foreach (Shape shape in draggedShapes)
-                    shape.UpdatePosition(e.X, e.Y);
-                Invalidate();
+                foreach (Shape shape in shapes)
+                    if(shape.isDragged)
+                        shape.UpdatePosition(e.X, e.Y);
+                Refresh();
             }
             
         }

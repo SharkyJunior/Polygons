@@ -9,3 +9,14 @@ D:\ДЗ\Polygons\Shapes\obj\Debug\Shapes.csproj.GenerateResource.cache
 D:\ДЗ\Polygons\Shapes\obj\Debug\Shapes.csproj.CoreCompileInputs.cache
 D:\ДЗ\Polygons\Shapes\obj\Debug\Shapes.exe
 D:\ДЗ\Polygons\Shapes\obj\Debug\Shapes.pdb
+\\Mac\Home\Documents\Polygons\Shapes\bin\Debug\Shapes.exe.config
+\\Mac\Home\Documents\Polygons\Shapes\bin\Debug\Shapes.exe
+\\Mac\Home\Documents\Polygons\Shapes\bin\Debug\Shapes.pdb
+\\Mac\Home\Documents\Polygons\Shapes\obj\Debug\Shapes.csproj.AssemblyReference.cache
+\\Mac\Home\Documents\Polygons\Shapes\obj\Debug\Shapes.csproj.SuggestedBindingRedirects.cache
+\\Mac\Home\Documents\Polygons\Shapes\obj\Debug\Shapes.Form1.resources
+\\Mac\Home\Documents\Polygons\Shapes\obj\Debug\Shapes.Properties.Resources.resources
+\\Mac\Home\Documents\Polygons\Shapes\obj\Debug\Shapes.csproj.GenerateResource.cache
+\\Mac\Home\Documents\Polygons\Shapes\obj\Debug\Shapes.csproj.CoreCompileInputs.cache
+\\Mac\Home\Documents\Polygons\Shapes\obj\Debug\Shapes.exe
+\\Mac\Home\Documents\Polygons\Shapes\obj\Debug\Shapes.pdb
