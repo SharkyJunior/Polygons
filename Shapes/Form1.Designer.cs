@@ -28,13 +28,39 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.menuStrip = new System.Windows.Forms.MenuStrip();
+            this.shapeToolStripDropBox = new System.Windows.Forms.ToolStripComboBox();
+            this.menuStrip.SuspendLayout();
             this.SuspendLayout();
+            // 
+            // menuStrip
+            // 
+            this.menuStrip.BackColor = System.Drawing.SystemColors.InactiveCaption;
+            this.menuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.shapeToolStripDropBox});
+            this.menuStrip.Location = new System.Drawing.Point(0, 0);
+            this.menuStrip.Name = "menuStrip";
+            this.menuStrip.Size = new System.Drawing.Size(785, 27);
+            this.menuStrip.TabIndex = 0;
+            this.menuStrip.Text = "Menu";
+            // 
+            // shapeToolStripDropBox
+            // 
+            this.shapeToolStripDropBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.shapeToolStripDropBox.Items.AddRange(new object[] {
+            "Circle",
+            "Square",
+            "Triangle"});
+            this.shapeToolStripDropBox.Name = "shapeToolStripDropBox";
+            this.shapeToolStripDropBox.Size = new System.Drawing.Size(75, 23);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(400, 234);
+            this.ClientSize = new System.Drawing.Size(785, 489);
+            this.Controls.Add(this.menuStrip);
+            this.MainMenuStrip = this.menuStrip;
             this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "Form1";
             this.Text = "Polygons";
@@ -43,11 +69,17 @@
             this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Form1_MouseDown);
             this.MouseMove += new System.Windows.Forms.MouseEventHandler(this.Form1_MouseMove);
             this.MouseUp += new System.Windows.Forms.MouseEventHandler(this.Form1_MouseUp);
+            this.menuStrip.ResumeLayout(false);
+            this.menuStrip.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
         #endregion
+
+        private System.Windows.Forms.MenuStrip menuStrip;
+        private System.Windows.Forms.ToolStripComboBox shapeToolStripDropBox;
     }
 }
 

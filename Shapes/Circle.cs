@@ -37,11 +37,5 @@ namespace Shapes
             }
             return false;
         }
-
-        public override void UpdatePosition(int newMouseX, int newMouseY)
-        {
-            x = newMouseX - offsetX;
-            y = newMouseY - offsetY;
-        }
     }
 }

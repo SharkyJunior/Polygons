@@ -22,6 +22,10 @@ namespace Shapes
 
         public abstract bool IsInside(int mouseX, int mouseY);
 
-        public abstract void UpdatePosition(int newMouseX, int newMouseY);
+        public virtual void UpdatePosition(int newMouseX, int newMouseY)
+        {
+            x = newMouseX - offsetX;
+            y = newMouseY - offsetY;
+        }
     }
 }

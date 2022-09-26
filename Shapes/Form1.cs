@@ -19,11 +19,12 @@ namespace Shapes
         public Form1()
         {
             InitializeComponent();
+
         }
 
         private void Form1_Load(object sender, EventArgs e)
         {
-
+            g = CreateGraphics();
         }
 
         private void Form1_Paint(object sender, PaintEventArgs e)
@@ -35,7 +36,6 @@ namespace Shapes
         }
         private void Form1_MouseDown(object sender, MouseEventArgs e)
         {
-            g = CreateGraphics();
             if (e.Button == MouseButtons.Left)
             {
                 foreach (Shape shape in shapes)
@@ -49,12 +49,27 @@ namespace Shapes
                     }
                 }
                 if (!isDragging)
-                    shapes.Add(new Circle(e.X, e.Y));
+                {
+                    switch (shapeToolStripDropBox.SelectedItem)
+                    {
+                        case "Circle":
+                            shapes.Add(new Circle(e.X, e.Y));
+                            break;
+                        case "Square":
+                            shapes.Add(new Square(e.X, e.Y));
+                            break;
+                        default:
+                            break;
+                    }
+                    
+                    Invalidate();
+                }
             }
             else if (e.Button == MouseButtons.Right)
+            {
                 shapes.Remove(shapes.Last());
-
-            Refresh();
+                Invalidate();
+            }
         }
 
         private void Form1_MouseUp(object sender, MouseEventArgs e)
@@ -62,7 +77,7 @@ namespace Shapes
             isDragging = false;
             foreach (Shape shape in shapes) 
                 shape.isDragged = false;
-            Refresh();
+            Invalidate();
         }
 
         private void Form1_MouseMove(object sender, MouseEventArgs e)
@@ -72,9 +87,8 @@ namespace Shapes
                 foreach (Shape shape in shapes)
                     if(shape.isDragged)
                         shape.UpdatePosition(e.X, e.Y);
-                Refresh();
+                Invalidate();
             }
-            
         }
     }
 }
