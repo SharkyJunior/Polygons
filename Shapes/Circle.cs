@@ -25,13 +25,14 @@ namespace Shapes
         public override void Draw(Graphics g)
         {
             Brush brush = new SolidBrush(color);
-            Pen pen = new Pen(color, 5);
+            Pen pen = new Pen(color, 2);
             g.DrawEllipse(pen, x - radius, y - radius, radius * 2, radius * 2);
         }
 
         public override bool IsInside(int mouseX, int mouseY)
         {
-            if (Math.Sqrt(Math.Abs(x - mouseX) * Math.Abs(x - mouseX) + Math.Abs(y - mouseY) * Math.Abs(y - mouseY)) <= radius)
+            //Math.Sqrt(Math.Abs(x - mouseX) * Math.Abs(x - mouseX) + Math.Abs(y - mouseY) * Math.Abs(y - mouseY))
+            if (Utilities.DistanceBetweenPoints(x, y, mouseX, mouseY) <= radius)
             {
                 return true;
             }

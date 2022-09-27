@@ -58,17 +58,20 @@ namespace Shapes
                         case "Square":
                             shapes.Add(new Square(e.X, e.Y));
                             break;
+                        case "Triangle":
+                            shapes.Add(new Triangle(e.X, e.Y));
+                            break;
                         default:
                             break;
                     }
                     
-                    Invalidate();
+                    Refresh();
                 }
             }
             else if (e.Button == MouseButtons.Right)
             {
                 shapes.Remove(shapes.Last());
-                Invalidate();
+                Refresh();
             }
         }
 
@@ -77,7 +80,7 @@ namespace Shapes
             isDragging = false;
             foreach (Shape shape in shapes) 
                 shape.isDragged = false;
-            Invalidate();
+            Refresh();
         }
 
         private void Form1_MouseMove(object sender, MouseEventArgs e)

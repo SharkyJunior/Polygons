@@ -28,7 +28,7 @@ namespace Shapes
         public override void Draw(Graphics g)
         {
             Brush brush = new SolidBrush(color);
-            Pen pen = new Pen(color, 5);
+            Pen pen = new Pen(color, 2);
             g.DrawRectangle(pen, x - rectSide / 2, y - rectSide / 2, rectSide, rectSide);
         }
 
