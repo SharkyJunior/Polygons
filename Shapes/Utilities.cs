@@ -45,7 +45,7 @@ namespace Shapes
             int counter = 0;
 
             convexHullPoints.Add(startingPoint);
-            
+            convexHullPoints.Add()
             /*
             while (!ccw)
             {
