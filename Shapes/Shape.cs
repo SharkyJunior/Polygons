@@ -14,9 +14,16 @@ namespace Shapes
         protected static int radius;
         protected static Color color;
         public bool isDragged;
+        public bool isTemporary;
 
         public int X => x;
         public int Y => y;
+
+        public Color Color
+        {
+            get => color;
+            set { color = value; }
+        }
 
         public abstract void Draw(Graphics g);
 

@@ -77,5 +77,17 @@ namespace Shapes
             if (area > 0) return -1; //clockwise
             return 0; //collinear
         }
+
+        static public bool IsInsideThePolygon(List<Shape> shapes, int mouseX, int mouseY)
+        {
+            var xSorted = new List<Shape>(shapes.OrderBy(shape => shape.X));
+            var ySorted = new List<Shape>(shapes.OrderBy(shape => shape.Y));
+            foreach (Shape shape in shapes)
+            {
+                if (shape.X == mouseX && shape.Y == mouseY) return false;
+            }
+            return false;
+
+        }
     }
 }

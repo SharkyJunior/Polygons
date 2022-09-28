@@ -47,10 +47,14 @@ namespace Shapes
 
         public override void Draw(Graphics g)
         {
-            CalculateVertexes();
-            Brush brush = new SolidBrush(color);
-            Pen pen = new Pen(color, 2);
-            g.DrawPolygon(pen, vertexes);
+            if (!isTemporary)
+            {
+                CalculateVertexes();
+                Brush brush = new SolidBrush(color);
+                Pen pen = new Pen(color, 2);
+                g.DrawPolygon(pen, vertexes);
+                g.FillPolygon(brush, vertexes);
+            }
         }
 
         //checking if triangle area == area of every triangle where vertexes are mouseCoords and 2 other triangle vertexes

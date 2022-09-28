@@ -27,9 +27,13 @@ namespace Shapes
 
         public override void Draw(Graphics g)
         {
-            Brush brush = new SolidBrush(color);
-            Pen pen = new Pen(color, 2);
-            g.DrawRectangle(pen, x - rectSide / 2, y - rectSide / 2, rectSide, rectSide);
+            if (!isTemporary)
+            {
+                Brush brush = new SolidBrush(color);
+                Pen pen = new Pen(color, 2);
+                g.DrawRectangle(pen, x - rectSide / 2, y - rectSide / 2, rectSide, rectSide);
+                g.FillRectangle(brush, x - rectSide / 2, y - rectSide / 2, rectSide, rectSide);
+            }
         }
 
         public override bool IsInside(int mouseX, int mouseY)

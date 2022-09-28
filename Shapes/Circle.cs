@@ -24,9 +24,13 @@ namespace Shapes
 
         public override void Draw(Graphics g)
         {
-            Brush brush = new SolidBrush(color);
-            Pen pen = new Pen(color, 2);
-            g.DrawEllipse(pen, x - radius, y - radius, radius * 2, radius * 2);
+            if (!isTemporary)
+            {
+                Brush brush = new SolidBrush(color);
+                Pen pen = new Pen(color, 2);
+                g.DrawEllipse(pen, x - radius, y - radius, radius * 2, radius * 2);
+                g.FillEllipse(brush, x - radius, y - radius, radius * 2, radius * 2);
+            }
         }
 
         public override bool IsInside(int mouseX, int mouseY)
