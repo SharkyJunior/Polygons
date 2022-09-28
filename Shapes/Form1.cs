@@ -19,7 +19,6 @@ namespace Shapes
         public Form1()
         {
             InitializeComponent();
-
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -29,6 +28,15 @@ namespace Shapes
 
         private void Form1_Paint(object sender, PaintEventArgs e)
         {
+            if (shapes.Count > 2)
+            {
+                List<Point> hull = Utilities.ConvertShapesToPoints(Utilities.GrahamScan(shapes));
+                for (int i = 0; i < hull.Count; i++)
+                {
+                    int k = (i + 1) % hull.Count;
+                    g.DrawLine(new Pen(Color.Red, 2), hull[i], hull[k]);
+                }
+            }
             foreach (Shape shape in shapes)
             {
                 shape.Draw(g);
@@ -80,6 +88,10 @@ namespace Shapes
             isDragging = false;
             foreach (Shape shape in shapes) 
                 shape.isDragged = false;
+            if (shapes.Count > 2)
+            {
+                shapes = Utilities.GrahamScan(shapes);
+            }
             Refresh();
         }
 

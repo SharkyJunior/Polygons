@@ -35,60 +35,47 @@ namespace Shapes
                 output.Add(new Point(shape.X, shape.Y));
             return output;
         }
-        static public List<Point> GrahamScan(List<Point> points)
-        {
-            List<Point> convexHullPoints = new List<Point>();
-            Point startingPoint = FindGreatestY(points);
-            points = SortPoints(points);
-            bool done = false;
-            bool ccw = false;
-            int counter = 0;
 
-            convexHullPoints.Add(startingPoint);
-            convexHullPoints.Add()
-            /*
-            while (!ccw)
+        static public List<Shape> GrahamScan(List<Shape> points)
+        {
+            List<Shape> convexHull = new List<Shape>();
+            points = SortShapes(points);
+
+            for (int i = 0; i < points.Count; i++)
             {
-                if (CounterClockwise(startingPoint, points[0], p))
+                while (convexHull.Count >= 2 && CounterClockwise(convexHull[convexHull.Count - 2], convexHull[convexHull.Count - 1], points[i]) == -1)
+                    convexHull.Remove(convexHull.Last());
+                convexHull.Add(points[i]);
             }
-            Point probablePoint = points[1];
-            while (!done)
-            {
-                while (!ccw)
-                {
-                    counter++;
-                    if (CounterClockwise())
-                }
-            }
-            */
+            return convexHull;
         }
 
-        static private Point FindGreatestY(List<Point> points)
+        static private Shape FindGreatestY(List<Shape> shapes)
         {
-            Point output = points[0];
-            foreach (Point point in points)
+
+            Shape output = shapes[0];
+            foreach (Shape shape in shapes)
             {
-                if (point.Y > output.Y)
-                    output = point;
+                if (shape.Y > output.Y)
+                    output = shape;
             }
             return output;
         }
 
         //sorting all the points by angle between horizontal line through greatest Y point and point. (counter clockwise)
-        static private List<Point> SortPoints(List<Point> points)
+        static private List<Shape> SortShapes(List<Shape> shapes)
         {
-            Point greatestYpoint = FindGreatestY(points);
-            points.Remove(greatestYpoint);
-            return new List<Point>(points.OrderBy(point => -Math.Atan2(greatestYpoint.Y - point.Y, greatestYpoint.X - point.X)).ToList()); 
+            Shape greatestYshape = FindGreatestY(shapes);
+            return new List<Shape>(shapes.OrderBy(shape => -Math.Atan2(greatestYshape.Y - shape.Y, greatestYshape.X - shape.X)).ThenBy(shape => DistanceBetweenPoints(shape.X, shape.Y, greatestYshape.X, greatestYshape.Y)).ToList()); 
         }
 
-        static private int CounterClockwise(Point pointBeforeLast, Point lastPoint, Point nextPoint)
+        static private int CounterClockwise(Shape pointBeforeLast, Shape lastPoint, Shape nextPoint)
         {
             double area = (lastPoint.X - pointBeforeLast.X) * (nextPoint.Y - pointBeforeLast.Y) - (lastPoint.Y - pointBeforeLast.Y) * (nextPoint.X - pointBeforeLast.X);
 
-            if (area < 0) return -1;
-            if (area > 0) return 1;
-            return 0;
+            if (area < 0) return 1; //counter clockwise
+            if (area > 0) return -1; //clockwise
+            return 0; //collinear
         }
     }
 }
