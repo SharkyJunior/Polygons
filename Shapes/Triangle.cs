@@ -21,8 +21,8 @@ namespace Shapes
 
         static Triangle()
         {
-            radius = 20;
-            color = Color.Green;
+            radius = 10;
+            color = Color.ForestGreen;
         }
 
         private void CalculateVertexes()
@@ -52,8 +52,8 @@ namespace Shapes
                 CalculateVertexes();
                 Brush brush = new SolidBrush(color);
                 Pen pen = new Pen(color, 2);
+                g.FillPolygon(new SolidBrush(Color.FromArgb(192, color)), vertexes);
                 g.DrawPolygon(pen, vertexes);
-                g.FillPolygon(brush, vertexes);
             }
         }
 

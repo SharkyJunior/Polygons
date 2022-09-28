@@ -82,21 +82,21 @@
             // vertexesColorToolStripMenuItem
             // 
             this.vertexesColorToolStripMenuItem.Name = "vertexesColorToolStripMenuItem";
-            this.vertexesColorToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.vertexesColorToolStripMenuItem.Size = new System.Drawing.Size(165, 22);
             this.vertexesColorToolStripMenuItem.Text = "Vertexes color...";
             this.vertexesColorToolStripMenuItem.Click += new System.EventHandler(this.vertexesColorToolStripMenuItem_Click);
             // 
             // linesColorToolStripMenuItem
             // 
             this.linesColorToolStripMenuItem.Name = "linesColorToolStripMenuItem";
-            this.linesColorToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.linesColorToolStripMenuItem.Size = new System.Drawing.Size(165, 22);
             this.linesColorToolStripMenuItem.Text = "Lines color...";
             this.linesColorToolStripMenuItem.Click += new System.EventHandler(this.linesColorToolStripMenuItem_Click);
             // 
             // innerAreaColorToolStripMenuItem
             // 
             this.innerAreaColorToolStripMenuItem.Name = "innerAreaColorToolStripMenuItem";
-            this.innerAreaColorToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.innerAreaColorToolStripMenuItem.Size = new System.Drawing.Size(165, 22);
             this.innerAreaColorToolStripMenuItem.Text = "Inner area color...";
             this.innerAreaColorToolStripMenuItem.Click += new System.EventHandler(this.innerAreaColorToolStripMenuItem_Click);
             // 
@@ -121,11 +121,13 @@
             "Triangle"});
             this.ShapeSelectionComboBox.Name = "ShapeSelectionComboBox";
             this.ShapeSelectionComboBox.Size = new System.Drawing.Size(121, 23);
+            this.ShapeSelectionComboBox.Text = "Circle";
             // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.SystemColors.Window;
             this.ClientSize = new System.Drawing.Size(1633, 661);
             this.Controls.Add(this.menuStrip);
             this.MainMenuStrip = this.menuStrip;

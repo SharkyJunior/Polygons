@@ -20,8 +20,8 @@ namespace Shapes
 
         static Square()
         {
-            radius = 20;
-            color = Color.Green;
+            radius = 10;
+            color = Color.ForestGreen;
             rectSide = (float)(radius * Math.Sin(Utilities.ToRadians(45)) * 2);
         }
 
@@ -31,8 +31,8 @@ namespace Shapes
             {
                 Brush brush = new SolidBrush(color);
                 Pen pen = new Pen(color, 2);
+                g.FillRectangle(new SolidBrush(Color.FromArgb(192, color)), x - rectSide / 2, y - rectSide / 2, rectSide, rectSide);
                 g.DrawRectangle(pen, x - rectSide / 2, y - rectSide / 2, rectSide, rectSide);
-                g.FillRectangle(brush, x - rectSide / 2, y - rectSide / 2, rectSide, rectSide);
             }
         }
 

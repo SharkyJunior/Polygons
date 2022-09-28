@@ -14,8 +14,8 @@ namespace Shapes
     {
         List<Shape> shapes = new List<Shape>();
         bool isDragging = false;
-        Color linesColor = Color.Red;
-        Color innerColor = Color.Beige;
+        Color linesColor = Color.OliveDrab;
+        Color innerColor = Color.Honeydew;
         Graphics g;
 
         public Main()
@@ -26,6 +26,7 @@ namespace Shapes
         private void Form1_Load(object sender, EventArgs e)
         {
             g = CreateGraphics();
+            g.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.HighQuality;
         }
 
         private void Form1_Paint(object sender, PaintEventArgs e)
@@ -34,7 +35,7 @@ namespace Shapes
             {
                 List<Point> hull = Utilities.ConvertShapesToPoints(Utilities.GrahamScan(shapes));
                 g.FillPolygon(new SolidBrush(innerColor), hull.ToArray());
-                g.DrawPolygon(new Pen(linesColor), hull.ToArray());
+                g.DrawPolygon(new Pen(linesColor, 2), hull.ToArray());
                 
             }
             foreach (Shape shape in shapes)
@@ -98,7 +99,14 @@ namespace Shapes
             }
             else if (e.Button == MouseButtons.Right)
             {
-                shapes.Remove(shapes.Last());
+                foreach (Shape shape in shapes)
+                {
+                    if (shape.IsInside(e.X, e.Y))
+                    {
+                        shapes.Remove(shape);
+                        break;
+                    }
+                }
                 Refresh();
             }
         }
