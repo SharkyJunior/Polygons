@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Main));
             this.menuStrip = new System.Windows.Forms.MenuStrip();
             this.FileMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.SettingsMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -38,6 +39,8 @@
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.ShapeSelectionComboBox = new System.Windows.Forms.ToolStripComboBox();
+            this.playButton = new System.Windows.Forms.ToolStripMenuItem();
+            this.stopButton = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -46,7 +49,9 @@
             this.menuStrip.BackColor = System.Drawing.SystemColors.InactiveCaption;
             this.menuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.FileMenuItem,
-            this.SettingsMenuItem});
+            this.SettingsMenuItem,
+            this.stopButton,
+            this.playButton});
             this.menuStrip.Location = new System.Drawing.Point(0, 0);
             this.menuStrip.Name = "menuStrip";
             this.menuStrip.Size = new System.Drawing.Size(1633, 24);
@@ -123,6 +128,23 @@
             this.ShapeSelectionComboBox.Size = new System.Drawing.Size(121, 23);
             this.ShapeSelectionComboBox.Text = "Circle";
             // 
+            // playButton
+            // 
+            this.playButton.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            this.playButton.Image = global::Shapes.Properties.Resources.icons8_play_96;
+            this.playButton.Name = "playButton";
+            this.playButton.Size = new System.Drawing.Size(28, 20);
+            this.playButton.Click += new System.EventHandler(this.playButton_Click);
+            // 
+            // stopButton
+            // 
+            this.stopButton.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            this.stopButton.Enabled = false;
+            this.stopButton.Image = global::Shapes.Properties.Resources.icons8_stop_96;
+            this.stopButton.Name = "stopButton";
+            this.stopButton.Size = new System.Drawing.Size(28, 20);
+            this.stopButton.Click += new System.EventHandler(this.stopButton_Click);
+            // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -130,6 +152,7 @@
             this.BackColor = System.Drawing.SystemColors.Window;
             this.ClientSize = new System.Drawing.Size(1633, 661);
             this.Controls.Add(this.menuStrip);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.menuStrip;
             this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "Main";
@@ -158,6 +181,8 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem1;
         private System.Windows.Forms.ToolStripComboBox ShapeSelectionComboBox;
+        private System.Windows.Forms.ToolStripMenuItem playButton;
+        private System.Windows.Forms.ToolStripMenuItem stopButton;
     }
 }
 

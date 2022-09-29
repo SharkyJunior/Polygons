@@ -14,9 +14,13 @@ namespace Shapes
     {
         List<Shape> shapes = new List<Shape>();
         bool isDragging = false;
+        bool isDynamic = false;
+
         Color linesColor = Color.OliveDrab;
         Color innerColor = Color.Honeydew;
         Graphics g;
+
+        Random random = new Random();
 
         public Main()
         {
@@ -25,12 +29,12 @@ namespace Shapes
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            g = CreateGraphics();
-            g.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.HighQuality;
         }
 
         private void Form1_Paint(object sender, PaintEventArgs e)
         {
+            g = CreateGraphics();
+            g.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.HighQuality;
             if (shapes.Count > 2)
             {
                 List<Point> hull = Utilities.ConvertShapesToPoints(Utilities.GrahamScan(shapes));
@@ -128,7 +132,7 @@ namespace Shapes
             if (isDragging)
             {
                 foreach (Shape shape in shapes)
-                    if(shape.isDragged)
+                    if (shape.isDragged)
                         shape.UpdatePosition(e.X, e.Y);
                 Invalidate();
             }
@@ -169,6 +173,36 @@ namespace Shapes
                 innerColor = colorDialog.Color;
             }
             Refresh();
+        }
+
+        private async void RandomShapeMovements()
+        {
+            while (isDynamic)
+            {
+                foreach(Shape shape in shapes)
+                {
+                    shape.X += random.Next(-5, 5);
+                    shape.Y += random.Next(-5, 5);
+                }
+                shapes = Utilities.GrahamScan(shapes);
+                Refresh();
+                await Task.Delay(100);
+            }
+        }
+
+        private void playButton_Click(object sender, EventArgs e)
+        {
+            playButton.Enabled = false;
+            stopButton.Enabled = true;
+            isDynamic = true;
+            RandomShapeMovements();
+        }
+
+        private void stopButton_Click(object sender, EventArgs e)
+        {
+            playButton.Enabled = true;
+            stopButton.Enabled = false;
+            isDynamic = false;
         }
     }
 }

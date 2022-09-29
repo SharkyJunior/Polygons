@@ -70,6 +70,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -83,6 +84,15 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Resources\icons8-polygon-96.ico" />
+    <None Include="Resources\icons8-stop-96.png" />
+    <None Include="Resources\icons8-stop-64.png" />
+    <None Include="Resources\icons8-stop-32.png" />
+    <None Include="Resources\icons8-play-96.png" />
+    <None Include="Resources\icons8-play-64.png" />
+    <None Include="Resources\icons8-play-32.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

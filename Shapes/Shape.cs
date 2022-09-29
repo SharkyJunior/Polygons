@@ -16,8 +16,16 @@ namespace Shapes
         public bool isDragged;
         public bool isTemporary;
 
-        public int X => x;
-        public int Y => y;
+        public int X
+        {
+            get => x;
+            set => x = value;
+        }
+        public int Y
+        {
+            get => y;
+            set => y = value;
+        }
 
         public Color Color
         {
