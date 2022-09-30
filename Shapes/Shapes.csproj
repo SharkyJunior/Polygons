@@ -97,6 +97,10 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\icons8-save-as-96.png" />
+    <None Include="Resources\icons8-save-96.png" />
+    <None Include="Resources\icons8-new-file-96.png" />
+    <None Include="Resources\icons8-add-file-96.png" />
     <Content Include="Resources\icons8-polygon-96.ico" />
     <None Include="Resources\icons8-stop-96.png" />
     <None Include="Resources\icons8-stop-64.png" />

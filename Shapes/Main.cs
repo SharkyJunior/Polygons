@@ -37,17 +37,24 @@ namespace Shapes
         public Main()
         {
             InitializeComponent();
+            KeyPreview = true;
         }
 
         private void Form1_Load(object sender, EventArgs e)
         {
-
+            
         }
 
         private void Form1_Paint(object sender, PaintEventArgs e)
         {
             g = CreateGraphics();
             g.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.HighQuality;
+            Shape.radius = vertexRadius;
+            
+            if (shapes.Count > 0)
+                playButton.Enabled = true;
+            else playButton.Enabled = false;
+
             if (shapes.Count > 2)
             {
                 List<Point> hull = Utilities.ConvertShapesToPoints(Utilities.GrahamScan(shapes));
@@ -57,7 +64,6 @@ namespace Shapes
             }
             foreach (Shape shape in shapes)
             {
-                Shape.radius = vertexRadius;
                 shape.Draw(g);
             }
         }
@@ -136,9 +142,6 @@ namespace Shapes
             {
                 Utilities.GrahamScan(ref shapes);
             }
-            if (shapes.Count > 0)
-                playButton.Enabled = true;
-            else playButton.Enabled = false;
             Refresh();
         }
 
@@ -233,18 +236,34 @@ namespace Shapes
             if (FILE_PATH == null)
             {
                 dlgRes = MessageBox.Show("Do you want to save changes?", "Polygons", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Warning);
+                switch (dlgRes)
+                {
+                    case DialogResult.Yes:
+                        FILE_PATH = CallSaveWindow();
+                        shapes.Clear();
+                        FILE_PATH = null;
+                        Refresh();
+                        break;
+                    case DialogResult.No:
+                        shapes.Clear();
+                        FILE_PATH = null;
+                        Refresh();
+                        break;
+                    case DialogResult.Cancel:
+                        break;
+                }
             }
-            switch (dlgRes)
+            else
             {
-                case DialogResult.Yes:
-                    break;
-                case DialogResult.No:
-                    shapes.Clear();
-                    Refresh();
-                    break;
-                case DialogResult.Cancel:
-                    break;
+                shapes.Clear();
+                Refresh();
+                FILE_PATH = null;
             }
+        }
+
+        protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
+        {
+            return base.ProcessCmdKey(ref msg, keyData);
         }
 
         private void saveToolStripMenuItem_Click(object sender, EventArgs e)
@@ -284,6 +303,11 @@ namespace Shapes
             }
         }
 
+        private void saveAsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FILE_PATH = CallSaveWindow();
+        }
+
         private string CallSaveWindow()
         {
             SaveFileDialog saveFileDialog = new SaveFileDialog();
@@ -300,5 +324,6 @@ namespace Shapes
             }
             return null;
         }
+
     }
 }
