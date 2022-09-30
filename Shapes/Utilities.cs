@@ -43,7 +43,7 @@ namespace Shapes
 
             for (int i = 0; i < points.Count; i++)
             {
-                while (convexHull.Count >= 2 && CounterClockwise(convexHull[convexHull.Count - 2], convexHull[convexHull.Count - 1], points[i]) == -1)
+                while (convexHull.Count >= 2 && Orientation(convexHull[convexHull.Count - 2], convexHull[convexHull.Count - 1], points[i]) == -1)
                     convexHull.Remove(convexHull.Last());
                 convexHull.Add(points[i]);
             }
@@ -58,7 +58,7 @@ namespace Shapes
 
             for (int i = 0; i < points.Count; i++)
             {
-                while (convexHull.Count >= 2 && CounterClockwise(convexHull[convexHull.Count - 2], convexHull[convexHull.Count - 1], points[i]) == -1)
+                while (convexHull.Count >= 2 && Orientation(convexHull[convexHull.Count - 2], convexHull[convexHull.Count - 1], points[i]) == -1)
                     convexHull.Remove(convexHull.Last());
                 convexHull.Add(points[i]);
             }
@@ -77,7 +77,7 @@ namespace Shapes
             return new List<Shape>(shapes.OrderBy(shape => -Math.Atan2(greatestYshape.Y - shape.Y, greatestYshape.X - shape.X)).ThenBy(shape => DistanceBetweenPoints(shape.X, shape.Y, greatestYshape.X, greatestYshape.Y)).ToList()); 
         }
 
-        static private int CounterClockwise(Shape pointBeforeLast, Shape lastPoint, Shape nextPoint)
+        static private int Orientation(Shape pointBeforeLast, Shape lastPoint, Shape nextPoint)
         {
             double area = (lastPoint.X - pointBeforeLast.X) * (nextPoint.Y - pointBeforeLast.Y) - (lastPoint.Y - pointBeforeLast.Y) * (nextPoint.X - pointBeforeLast.X);
 

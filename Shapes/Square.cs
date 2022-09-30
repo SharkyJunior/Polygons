@@ -9,13 +9,19 @@ using System.Threading.Tasks;
 namespace Shapes
 {
     
-    sealed internal class Square : Shape
+    sealed public class Square : Shape
     {
         static float rectSide;
+
+        public Square()
+        {
+            this.X = 100;
+            this.Y = 100;
+        }
         public Square(int x, int y) 
         {
-            this.x = x;
-            this.y = y;
+            this.X = x;
+            this.Y = y;
         }
 
         static Square()
@@ -27,18 +33,15 @@ namespace Shapes
 
         public override void Draw(Graphics g)
         {
-            if (!isTemporary)
-            {
-                Brush brush = new SolidBrush(color);
-                Pen pen = new Pen(color, 2);
-                g.FillRectangle(new SolidBrush(Color.FromArgb(192, color)), x - rectSide / 2, y - rectSide / 2, rectSide, rectSide);
-                g.DrawRectangle(pen, x - rectSide / 2, y - rectSide / 2, rectSide, rectSide);
-            }
+            Brush brush = new SolidBrush(color);
+            Pen pen = new Pen(color, 2);
+            g.FillRectangle(new SolidBrush(Color.FromArgb(192, color)), X - rectSide / 2, Y - rectSide / 2, rectSide, rectSide);
+            g.DrawRectangle(pen, X - rectSide / 2, Y - rectSide / 2, rectSide, rectSide);
         }
 
         public override bool IsInside(int mouseX, int mouseY)
         {
-            if (Math.Abs(mouseX - x) <= rectSide / 2 && Math.Abs(mouseY - y) <= rectSide / 2)
+            if (Math.Abs(mouseX - X) <= rectSide / 2 && Math.Abs(mouseY - Y) <= rectSide / 2)
                 return true;
             return false;
         }

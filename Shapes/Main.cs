@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -15,9 +16,20 @@ namespace Shapes
         List<Shape> shapes = new List<Shape>();
         bool isDragging = false;
         bool isDynamic = false;
+        string FILE_PATH = null;
+
+
+        private int vertexRadius = 10;
+
+        public int VertexRadius
+        {
+            get => vertexRadius;
+            set => vertexRadius = value;
+        }
 
         Color linesColor = Color.OliveDrab;
         Color innerColor = Color.Honeydew;
+        Color vertexesColor = Color.ForestGreen;
         Graphics g;
 
         Random random = new Random();
@@ -29,6 +41,7 @@ namespace Shapes
 
         private void Form1_Load(object sender, EventArgs e)
         {
+
         }
 
         private void Form1_Paint(object sender, PaintEventArgs e)
@@ -44,8 +57,8 @@ namespace Shapes
             }
             foreach (Shape shape in shapes)
             {
-                if (!shape.isTemporary)
-                    shape.Draw(g);
+                Shape.radius = vertexRadius;
+                shape.Draw(g);
             }
         }
         private void Form1_MouseDown(object sender, MouseEventArgs e)
@@ -123,6 +136,9 @@ namespace Shapes
             {
                 Utilities.GrahamScan(ref shapes);
             }
+            if (shapes.Count > 0)
+                playButton.Enabled = true;
+            else playButton.Enabled = false;
             Refresh();
         }
 
@@ -144,8 +160,9 @@ namespace Shapes
             colorDialog.ShowHelp = true;
             if (colorDialog.ShowDialog() == DialogResult.OK)
             {
+                vertexesColor = colorDialog.Color;
                 foreach (Shape shape in shapes)
-                    shape.Color = colorDialog.Color;
+                    Shape.color = colorDialog.Color;
             }
             Refresh();
         }
@@ -202,6 +219,86 @@ namespace Shapes
             playButton.Enabled = true;
             stopButton.Enabled = false;
             isDynamic = false;
+        }
+
+        private void vertexRadiusToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            RadiusSliderForm radiusSliderForm = new RadiusSliderForm(this);
+            radiusSliderForm.Show();
+        }
+
+        private void newToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            DialogResult dlgRes = DialogResult.Cancel;
+            if (FILE_PATH == null)
+            {
+                dlgRes = MessageBox.Show("Do you want to save changes?", "Polygons", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Warning);
+            }
+            switch (dlgRes)
+            {
+                case DialogResult.Yes:
+                    break;
+                case DialogResult.No:
+                    shapes.Clear();
+                    Refresh();
+                    break;
+                case DialogResult.Cancel:
+                    break;
+            }
+        }
+
+        private void saveToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (FILE_PATH == null)
+            {
+                DialogResult dlgRes = DialogResult.No;
+                dlgRes = MessageBox.Show("Do you want to save changes?", "Polygons", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                switch (dlgRes)
+                {
+                    case DialogResult.Yes:
+                        FILE_PATH = CallSaveWindow();
+                        break;
+                    case DialogResult.No:
+                        break;
+                }
+            }
+            else
+            {
+                try
+                {
+                    XmlOperations.SaveToXml(FILE_PATH, new SaveLoadFormat(shapes, innerColor, linesColor, vertexesColor, vertexRadius));
+                }
+                catch
+                {
+                    DialogResult dlgRes = DialogResult.No;
+                    dlgRes = MessageBox.Show("Do you want to save changes?", "Polygons", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                    switch (dlgRes)
+                    {
+                        case DialogResult.Yes:
+                            FILE_PATH = CallSaveWindow();
+                            break;
+                        case DialogResult.No:
+                            break;
+                    }
+                }
+            }
+        }
+
+        private string CallSaveWindow()
+        {
+            SaveFileDialog saveFileDialog = new SaveFileDialog();
+
+            saveFileDialog.Filter = "polygon files (*.polygon)|*.polygon";
+            saveFileDialog.DefaultExt = "polygon";
+            saveFileDialog.AddExtension = true;
+            saveFileDialog.RestoreDirectory = true;
+
+            if (saveFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                XmlOperations.SaveToXml(saveFileDialog.FileName, new SaveLoadFormat(shapes, innerColor, linesColor, vertexesColor, vertexRadius));
+                return saveFileDialog.FileName;
+            }
+            return null;
         }
     }
 }

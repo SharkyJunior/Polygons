@@ -4,34 +4,29 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Drawing;
+using System.Xml.Serialization;
 
 namespace Shapes
 {
-    internal abstract class Shape
+    [Serializable]
+    [XmlRoot("Shape")]
+    [XmlInclude(typeof(Circle)), XmlInclude(typeof(Square)), XmlInclude(typeof(Triangle))]
+    public abstract class Shape
     {
-        protected int x, y;
+        [XmlIgnore]
         public int offsetX, offsetY;
-        protected static int radius;
-        protected static Color color;
+
+        [XmlIgnore]
         public bool isDragged;
-        public bool isTemporary;
 
-        public int X
-        {
-            get => x;
-            set => x = value;
-        }
-        public int Y
-        {
-            get => y;
-            set => y = value;
-        }
+        public int X { get; set; }
+        public int Y { get; set; }
 
-        public Color Color
-        {
-            get => color;
-            set { color = value; }
-        }
+        [XmlIgnore]
+        public static Color color { get; set; }
+
+        [XmlIgnore]
+        public static int radius { get; set; }
 
         public abstract void Draw(Graphics g);
 
@@ -39,8 +34,8 @@ namespace Shapes
 
         public virtual void UpdatePosition(int newMouseX, int newMouseY)
         {
-            x = newMouseX - offsetX;
-            y = newMouseY - offsetY;
+            X = newMouseX - offsetX;
+            Y = newMouseY - offsetY;
         }
     }
 }

@@ -47,6 +47,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Circle.cs" />
+    <Compile Include="SaveLoadFormat.cs" />
     <Compile Include="Main.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -55,12 +56,13 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="RadiusForm.cs">
+    <Compile Include="RadiusSliderForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="RadiusForm.Designer.cs">
-      <DependentUpon>RadiusForm.cs</DependentUpon>
+    <Compile Include="RadiusSliderForm.Designer.cs">
+      <DependentUpon>RadiusSliderForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="XmlOperations.cs" />
     <Compile Include="Shape.cs" />
     <Compile Include="Square.cs" />
     <Compile Include="Triangle.cs" />
@@ -78,6 +80,9 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="RadiusSliderForm.resx">
+      <DependentUpon>RadiusSliderForm.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

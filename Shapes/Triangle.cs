@@ -7,14 +7,23 @@ using System.Drawing;
 
 namespace Shapes
 {
-    sealed internal class Triangle : Shape
+    sealed public class Triangle : Shape
     {
         Point[] vertexes = new Point[3];
         double area;
+
+        public Triangle()
+        {
+            this.X = 100;
+            this.Y = 100;
+            CalculateVertexes();
+            CalculateArea();
+        }
+
         public Triangle(int x, int y)
         {
-            this.x = x;
-            this.y = y;
+            this.X = x;
+            this.Y = y;
             CalculateVertexes();
             CalculateArea();
         }
@@ -28,13 +37,13 @@ namespace Shapes
         private void CalculateVertexes()
         {
             // calculating left bottom vertex
-            vertexes[0] = new Point(x - Convert.ToInt32(Math.Sqrt(radius * radius - (radius / 2) * (radius / 2))), y + radius / 2);
+            vertexes[0] = new Point(X - Convert.ToInt32(Math.Sqrt(radius * radius - (radius / 2) * (radius / 2))), Y + radius / 2);
 
             // calculating middle upper vertex
-            vertexes[1] = new Point(x, y - radius);
+            vertexes[1] = new Point(X, Y - radius);
 
             // calculatin right bottom vertex
-            vertexes[2] = new Point(x + Convert.ToInt32(Math.Sqrt(radius * radius - (radius / 2) * (radius / 2))), y + radius / 2);
+            vertexes[2] = new Point(X + Convert.ToInt32(Math.Sqrt(radius * radius - (radius / 2) * (radius / 2))), Y + radius / 2);
         }
 
         // area is calculated by heron formula
@@ -47,14 +56,11 @@ namespace Shapes
 
         public override void Draw(Graphics g)
         {
-            if (!isTemporary)
-            {
-                CalculateVertexes();
-                Brush brush = new SolidBrush(color);
-                Pen pen = new Pen(color, 2);
-                g.FillPolygon(new SolidBrush(Color.FromArgb(192, color)), vertexes);
-                g.DrawPolygon(pen, vertexes);
-            }
+            CalculateVertexes();
+            Brush brush = new SolidBrush(color);
+            Pen pen = new Pen(color, 2);
+            g.FillPolygon(new SolidBrush(Color.FromArgb(192, color)), vertexes);
+            g.DrawPolygon(pen, vertexes);
         }
 
         //checking if triangle area == area of every triangle where vertexes are mouseCoords and 2 other triangle vertexes
