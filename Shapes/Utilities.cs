@@ -36,6 +36,21 @@ namespace Shapes
             return output;
         }
 
+        static public List<Shape> GrahamScan(ref List<Shape> points)
+        {
+            List<Shape> convexHull = new List<Shape>();
+            points = SortShapes(points);
+
+            for (int i = 0; i < points.Count; i++)
+            {
+                while (convexHull.Count >= 2 && CounterClockwise(convexHull[convexHull.Count - 2], convexHull[convexHull.Count - 1], points[i]) == -1)
+                    convexHull.Remove(convexHull.Last());
+                convexHull.Add(points[i]);
+            }
+            points = convexHull;
+            return convexHull;
+        }
+
         static public List<Shape> GrahamScan(List<Shape> points)
         {
             List<Shape> convexHull = new List<Shape>();
@@ -52,14 +67,7 @@ namespace Shapes
 
         static private Shape FindGreatestY(List<Shape> shapes)
         {
-
-            Shape output = shapes[0];
-            foreach (Shape shape in shapes)
-            {
-                if (shape.Y > output.Y)
-                    output = shape;
-            }
-            return output;
+            return new List<Shape>(shapes.OrderBy(shape => -shape.Y))[0];
         }
 
         //sorting all the points by angle between horizontal line through greatest Y point and point. (counter clockwise)

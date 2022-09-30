@@ -86,9 +86,8 @@ namespace Shapes
                     }
                     if (shapes.Count > 2)
                     {
-                        if (!Utilities.GrahamScan(shapes).Contains(newShape))
+                        if (!Utilities.GrahamScan(ref shapes).Contains(newShape))
                         {
-                            shapes[shapes.Count - 1].isTemporary = true;
                             isDragging = true;
                             foreach (Shape shape in shapes)
                             {
@@ -122,7 +121,7 @@ namespace Shapes
                 shape.isDragged = false;
             if (shapes.Count > 2)
             {
-                shapes = Utilities.GrahamScan(shapes);
+                Utilities.GrahamScan(ref shapes);
             }
             Refresh();
         }
@@ -184,7 +183,7 @@ namespace Shapes
                     shape.X += random.Next(-5, 5);
                     shape.Y += random.Next(-5, 5);
                 }
-                shapes = Utilities.GrahamScan(shapes);
+                Utilities.GrahamScan(ref shapes);
                 Refresh();
                 await Task.Delay(100);
             }
