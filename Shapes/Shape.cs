@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Drawing;
 using System.Xml.Serialization;
+using System.CodeDom;
 
 namespace Shapes
 {
@@ -31,6 +32,15 @@ namespace Shapes
         public abstract void Draw(Graphics g);
 
         public abstract bool IsInside(int mouseX, int mouseY);
+
+        protected Shape CopyTo(Shape copy)
+        {
+            copy.X = X;
+            copy.Y = Y;
+            return copy;
+        }
+
+        public abstract Shape Copy();
 
         public virtual void UpdatePosition(int newMouseX, int newMouseY)
         {

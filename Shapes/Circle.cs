@@ -36,6 +36,11 @@ namespace Shapes
             g.DrawEllipse(pen, X - radius, Y - radius, radius * 2, radius * 2);
         }
 
+        public override Shape Copy()
+        {
+            return CopyTo(new Circle());
+        }
+
         public override bool IsInside(int mouseX, int mouseY)
         {
             //Math.Sqrt(Math.Abs(x - mouseX) * Math.Abs(x - mouseX) + Math.Abs(y - mouseY) * Math.Abs(y - mouseY))

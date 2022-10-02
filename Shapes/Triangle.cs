@@ -34,6 +34,11 @@ namespace Shapes
             color = Color.ForestGreen;
         }
 
+        public override Shape Copy()
+        {
+            return CopyTo(new Triangle());
+        }
+
         private void CalculateVertexes()
         {
             // calculating left bottom vertex

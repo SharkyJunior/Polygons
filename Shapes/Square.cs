@@ -31,6 +31,11 @@ namespace Shapes
             rectSide = (float)(radius * Math.Sin(Utilities.ToRadians(45)) * 2);
         }
 
+        public override Shape Copy()
+        {
+            return CopyTo(new Square());
+        }
+
         public override void Draw(Graphics g)
         {
             Brush brush = new SolidBrush(color);

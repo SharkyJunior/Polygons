@@ -46,6 +46,7 @@ namespace Shapes
         private void radiusTrackBar_ValueChanged(object sender, EventArgs e)
         {
             mainForm.VertexRadius = radiusTrackBar.Value;
+            mainForm.SaveCurrentState();
             mainForm.Refresh();
         }
     }

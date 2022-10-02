@@ -46,8 +46,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Buffer.cs" />
     <Compile Include="Circle.cs" />
-    <Compile Include="SaveLoadFormat.cs" />
+    <Compile Include="PolygonData.cs" />
     <Compile Include="Main.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -97,10 +98,13 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\icons8-shape-96.png" />
+    <None Include="Resources\icons8-radius-96.png" />
     <None Include="Resources\icons8-save-as-96.png" />
     <None Include="Resources\icons8-save-96.png" />
     <None Include="Resources\icons8-new-file-96.png" />
     <None Include="Resources\icons8-add-file-96.png" />
+    <None Include="Resources\icons8-paint-palette-96.png" />
     <Content Include="Resources\icons8-polygon-96.ico" />
     <None Include="Resources\icons8-stop-96.png" />
     <None Include="Resources\icons8-stop-64.png" />

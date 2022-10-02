@@ -83,6 +83,16 @@ namespace Shapes.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap icons8_paint_palette_96 {
+            get {
+                object obj = ResourceManager.GetObject("icons8-paint-palette-96", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap icons8_play_32 {
             get {
                 object obj = ResourceManager.GetObject("icons8-play-32", resourceCulture);
@@ -113,6 +123,16 @@ namespace Shapes.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap icons8_radius_96 {
+            get {
+                object obj = ResourceManager.GetObject("icons8-radius-96", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap icons8_save_96 {
             get {
                 object obj = ResourceManager.GetObject("icons8-save-96", resourceCulture);
@@ -126,6 +146,16 @@ namespace Shapes.Properties {
         internal static System.Drawing.Bitmap icons8_save_as_96 {
             get {
                 object obj = ResourceManager.GetObject("icons8-save-as-96", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap icons8_shape_96 {
+            get {
+                object obj = ResourceManager.GetObject("icons8-shape-96", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
