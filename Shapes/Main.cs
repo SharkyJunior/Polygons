@@ -147,7 +147,7 @@ namespace Shapes
 
         private void Form1_MouseUp(object sender, MouseEventArgs e)
         {
-            Debug.WriteLine("mouse up");
+            //Debug.WriteLine("mouse up");
             SaveCurrentState();
             isDragging = false;
             foreach (Shape shape in shapes)
@@ -252,7 +252,8 @@ namespace Shapes
             radiusSliderForm.Show();
         }
 
-        #region SaveLoad
+        //TODO: refactor newFileEvent
+        #region SaveLoad 
         private void newToolStripMenuItem_Click(object sender, EventArgs e)
         {
             DialogResult dlgRes = DialogResult.Cancel;
@@ -264,19 +265,11 @@ namespace Shapes
                     case DialogResult.Yes:
                         DialogResult saveDlg = CallSaveWindow();
                         if (saveDlg == DialogResult.OK)
-                        {
-                            shapes.Clear();
-                            FILE_PATH = null;
-                            buffer.Clear();
-                            UpdateTitle(false);
-                        }
+                            ResetPolygon();
                         Refresh();
                         break;
                     case DialogResult.No:
-                        shapes.Clear();
-                        FILE_PATH = null;
-                        buffer.Clear();
-                        UpdateTitle(false);
+                        ResetPolygon();
                         Refresh();
                         break;
                     case DialogResult.Cancel:
@@ -290,17 +283,11 @@ namespace Shapes
                 {
                     case DialogResult.Yes:
                         XmlOperations.SaveToXml(FILE_PATH, new PolygonData(shapes, innerColor, linesColor, vertexesColor, vertexRadius));
-                        shapes.Clear();
-                        FILE_PATH = null;
-                        buffer.Clear();
-                        UpdateTitle(false);
+                        ResetPolygon();
                         Refresh();
                         break;
                     case DialogResult.No:
-                        shapes.Clear();
-                        FILE_PATH = null;
-                        buffer.Clear();
-                        UpdateTitle(false);
+                        ResetPolygon();
                         Refresh();
                         break;
                     case DialogResult.Cancel:
@@ -309,11 +296,8 @@ namespace Shapes
             }
             else
             {
-                shapes.Clear();
-                buffer.Clear();
+                ResetPolygon();
                 Refresh();
-                FILE_PATH = null;
-                UpdateTitle(false);
             }
         }
 
@@ -460,6 +444,20 @@ namespace Shapes
             Shape.color = vertexesColor;
             UpdateTitle(false);
             Refresh();
+        }
+
+        private void ResetPolygon()
+        {
+            FILE_PATH = null;
+            UpdateTitle(false);
+            shapes.Clear();
+            buffer.Clear();
+            vertexRadius = 10;
+            linesColor = Color.OliveDrab;
+            innerColor = Color.Honeydew;
+            vertexesColor = Color.ForestGreen;
+            Shape.color = vertexesColor;
+            SaveCurrentState();
         }
     }
 }

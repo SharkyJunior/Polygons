@@ -21,3 +21,4 @@ D:\ДЗ\Polygons\Shapes\obj\Debug\Shapes.pdb
 D:\ДЗ\Polygons\Shapes\obj\Debug\Shapes.Main.resources
 \\Mac\Home\Documents\Polygons\Shapes\obj\Debug\Shapes.Main.resources
 D:\ДЗ\Polygons\Shapes\obj\Debug\Shapes.RadiusSliderForm.resources
+\\Mac\Home\Documents\Polygons\Shapes\obj\Debug\Shapes.RadiusSliderForm.resources

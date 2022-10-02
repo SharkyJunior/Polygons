@@ -22,22 +22,22 @@ namespace Shapes
         public void SaveCurrentState(PolygonData state)
         {
             // start debug
-            Debug.WriteLine($"\n++currentState = {currentState + 1}, buffer.Count - 1 = {buffer.Count - 1}");
-            foreach (PolygonData data in buffer)
-                Debug.WriteLine(data.Shapes.Count);
-            Debug.WriteLine("");
+            //Debug.WriteLine($"\n++currentState = {currentState + 1}, buffer.Count - 1 = {buffer.Count - 1}");
+            //foreach (PolygonData data in buffer)
+            //    Debug.WriteLine(data.Shapes.Count);
+            //Debug.WriteLine("");
             // end debug
             if (++currentState <= buffer.Count - 1)
             {
                 // start debug
-                Debug.WriteLine($"buffer[currentRange].Count = {buffer[currentState].Shapes.Count}");
+                //Debug.WriteLine($"buffer[currentRange].Count = {buffer[currentState].Shapes.Count}");
                 // end debug
 
                 buffer.RemoveRange(currentState, buffer.Count - currentState);
 
                 // start debug
-                foreach (PolygonData data in buffer)
-                    Debug.WriteLine(data.Shapes.Count);
+                //foreach (PolygonData data in buffer)
+                //    Debug.WriteLine(data.Shapes.Count);
                 // end debug
             }
 
@@ -51,28 +51,28 @@ namespace Shapes
 
 
             // start debug
-            Debug.WriteLine($"\nsave state\n" +
-                $"buffer len: {buffer.Count}\n" +
-                $"currentState: {currentState}");
+            //Debug.WriteLine($"\nsave state\n" +
+            //    $"buffer len: {buffer.Count}\n" +
+            //    $"currentState: {currentState}");
             // end debug
         }
 
         public PolygonData RevertToPreviousState()
         {
             //start debug
-            foreach (PolygonData data in buffer)
-                Debug.WriteLine(data.Shapes.Count);
-            Debug.WriteLine("");
+            //foreach (PolygonData data in buffer)
+            //    Debug.WriteLine(data.Shapes.Count);
+            //Debug.WriteLine("");
             // end debug
 
             if (currentState >= 0)
                 currentState--;
 
             //start debug
-            Debug.WriteLine($"prev\n" +
-                $"buffer len: {buffer.Count}\n" +
-                $"currentState: {currentState}\n" +
-                $"currentStateLen: {buffer[currentState].Shapes.Count}");
+            //Debug.WriteLine($"prev\n" +
+            //    $"buffer len: {buffer.Count}\n" +
+            //    $"currentState: {currentState}\n" +
+            //    $"currentStateLen: {buffer[currentState].Shapes.Count}");
             // end debug
 
             return buffer[currentState];
@@ -84,10 +84,10 @@ namespace Shapes
                 currentState++;
 
             // start debug
-            Debug.WriteLine($"\nnext\n" +
-                $"buffer len: {buffer.Count}\n" +
-                $"currentState: {currentState}\n" +
-                $"currentStateLen: {buffer[currentState].Shapes.Count}");
+            //Debug.WriteLine($"\nnext\n" +
+            //    $"buffer len: {buffer.Count}\n" +
+            //    $"currentState: {currentState}\n" +
+            //    $"currentStateLen: {buffer[currentState].Shapes.Count}");
             // end debug
 
             return buffer[currentState];
@@ -96,6 +96,7 @@ namespace Shapes
         public void Clear()
         {
             buffer.Clear();
+            currentState = -1;
         }
     }
 }
