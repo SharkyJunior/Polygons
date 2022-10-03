@@ -459,5 +459,36 @@ namespace Shapes
             Shape.color = vertexesColor;
             SaveCurrentState();
         }
+
+        private void Main_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (!isSaved)
+            {
+                DialogResult dlgRes = MessageBox.Show("Do you want to save changes?", "Polygons", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Warning);
+                switch (dlgRes)
+                {
+                    case DialogResult.Yes:
+                        if (FILE_PATH == null)
+                        {
+                            DialogResult saveDlg = CallSaveWindow();
+                            if (saveDlg == DialogResult.Cancel)
+                                e.Cancel = true;
+                        }
+                        else
+                        {
+                            XmlOperations.SaveToXml(FILE_PATH, new PolygonData(shapes, innerColor, linesColor, vertexesColor, vertexRadius));
+                        }
+                        Refresh();
+                        break;
+                    case DialogResult.No:
+                        break;
+                    case DialogResult.Cancel:
+                        e.Cancel = true;
+                        Refresh();
+                        break;
+                }
+            }
+
+        }
     }
 }
