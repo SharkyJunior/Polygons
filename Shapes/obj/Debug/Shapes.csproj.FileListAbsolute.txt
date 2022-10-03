@@ -22,3 +22,7 @@ D:\ДЗ\Polygons\Shapes\obj\Debug\Shapes.Main.resources
 \\Mac\Home\Documents\Polygons\Shapes\obj\Debug\Shapes.Main.resources
 D:\ДЗ\Polygons\Shapes\obj\Debug\Shapes.RadiusSliderForm.resources
 \\Mac\Home\Documents\Polygons\Shapes\obj\Debug\Shapes.RadiusSliderForm.resources
+C:\00\Polygons\Shapes\obj\Debug\Shapes.csproj.AssemblyReference.cache
+C:\00\Polygons\Shapes\obj\Debug\Shapes.csproj.SuggestedBindingRedirects.cache
+C:\00\Polygons\Shapes\obj\Debug\Shapes.exe
+C:\00\Polygons\Shapes\obj\Debug\Shapes.pdb

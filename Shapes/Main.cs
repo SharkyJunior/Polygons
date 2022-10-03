@@ -33,8 +33,7 @@ namespace Shapes
 
         Color linesColor = Color.OliveDrab;
         Color innerColor = Color.Honeydew;
-        Color vertexesColor = Color.ForestGreen;
-        Graphics g;
+        Color vertexesColor = Color.FromArgb(192, Color.ForestGreen);
 
         Random random = new Random();
 
@@ -97,25 +96,25 @@ namespace Shapes
                 if (!isDragging)
                 {
                     Shape newShape = null;
-                    switch (ShapeSelectionComboBox.SelectedItem)
+                    if (circleToolStripMenuItem.Checked) 
                     {
-                        case "Circle":
-                            newShape = new Circle(e.X, e.Y);
-                            shapes.Add(newShape);
-                            break;
-                        case "Square":
-                            newShape = new Square(e.X, e.Y);
-                            shapes.Add(newShape);
-                            break;
-                        case "Triangle":
-                            newShape = new Triangle(e.X, e.Y);
-                            shapes.Add(newShape);
-                            break;
-                        default:
-                            MessageBox.Show("Unknown shape. Please select a shape.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                            break;
+                        newShape = new Circle(e.X, e.Y);
+                        shapes.Add(newShape); 
                     }
-                    if (shapes.Count > 2)
+                    else if (squareToolStripMenuItem.Checked)
+                    {
+                        newShape = new Square(e.X, e.Y);
+                        shapes.Add(newShape);
+                    }
+                    else if (triangleToolStripMenuItem.Checked)
+                    {
+                        newShape = new Triangle(e.X, e.Y);
+                        shapes.Add(newShape);
+                    }
+                    else
+                        MessageBox.Show("Unknown shape. Please select a shape.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    
+                    if (shapes.Count > 2 && newShape != null)
                     {
                         if (!Utilities.GrahamScan(ref shapes).Contains(newShape))
                         {
@@ -177,9 +176,8 @@ namespace Shapes
             if (colorDialog.ShowDialog() == DialogResult.OK)
             {
                SaveCurrentState();
-               vertexesColor = colorDialog.Color;
-                foreach (Shape shape in shapes)
-                    Shape.color = colorDialog.Color;
+               vertexesColor = Color.FromArgb(192, colorDialog.Color);
+               Shape.color = vertexesColor;
             }
             Refresh();
         }
@@ -441,7 +439,7 @@ namespace Shapes
             this.innerColor = innerColor;
             this.linesColor = linesColor;
             this.vertexesColor = vertexesColor;
-            Shape.color = vertexesColor;
+            Shape.color = Color.FromArgb(192, vertexesColor);
             UpdateTitle(false);
             Refresh();
         }
@@ -456,7 +454,7 @@ namespace Shapes
             linesColor = Color.OliveDrab;
             innerColor = Color.Honeydew;
             vertexesColor = Color.ForestGreen;
-            Shape.color = vertexesColor;
+            Shape.color = Color.FromArgb(192, vertexesColor);
             SaveCurrentState();
         }
 
@@ -489,6 +487,27 @@ namespace Shapes
                 }
             }
 
+        }
+
+        private void circleToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            circleToolStripMenuItem.Checked = true;
+            squareToolStripMenuItem.Checked = false;
+            triangleToolStripMenuItem.Checked = false;
+        }
+
+        private void squareToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            circleToolStripMenuItem.Checked = false;
+            squareToolStripMenuItem.Checked = true;
+            triangleToolStripMenuItem.Checked = false;
+        }
+
+        private void triangleToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            circleToolStripMenuItem.Checked = false;
+            squareToolStripMenuItem.Checked = false;
+            triangleToolStripMenuItem.Checked = true;
         }
     }
 }
