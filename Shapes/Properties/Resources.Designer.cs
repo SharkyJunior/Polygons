@@ -73,6 +73,26 @@ namespace Shapes.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap icons8_circle_96 {
+            get {
+                object obj = ResourceManager.GetObject("icons8-circle-96", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap icons8_maximize_button_96 {
+            get {
+                object obj = ResourceManager.GetObject("icons8-maximize-button-96", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap icons8_new_file_96 {
             get {
                 object obj = ResourceManager.GetObject("icons8-new-file-96", resourceCulture);
@@ -186,6 +206,16 @@ namespace Shapes.Properties {
         internal static System.Drawing.Bitmap icons8_stop_96 {
             get {
                 object obj = ResourceManager.GetObject("icons8-stop-96", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap icons8_triangle_96 {
+            get {
+                object obj = ResourceManager.GetObject("icons8-triangle-96", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

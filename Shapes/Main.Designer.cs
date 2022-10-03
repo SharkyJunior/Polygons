@@ -43,12 +43,12 @@
             this.vertexRadiusToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStrip1 = new System.Windows.Forms.ToolStrip();
-            this.playButton = new System.Windows.Forms.ToolStripButton();
-            this.stopButton = new System.Windows.Forms.ToolStripButton();
             this.circleToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.squareToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.triangleToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStrip1 = new System.Windows.Forms.ToolStrip();
+            this.playButton = new System.Windows.Forms.ToolStripButton();
+            this.stopButton = new System.Windows.Forms.ToolStripButton();
             this.menuStrip.SuspendLayout();
             this.toolStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -182,6 +182,32 @@
             this.toolStripMenuItem1.Size = new System.Drawing.Size(359, 44);
             this.toolStripMenuItem1.Text = "Select shape...";
             // 
+            // circleToolStripMenuItem
+            // 
+            this.circleToolStripMenuItem.Checked = true;
+            this.circleToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.circleToolStripMenuItem.Image = global::Shapes.Properties.Resources.icons8_circle_96;
+            this.circleToolStripMenuItem.Name = "circleToolStripMenuItem";
+            this.circleToolStripMenuItem.Size = new System.Drawing.Size(359, 44);
+            this.circleToolStripMenuItem.Text = "Circle";
+            this.circleToolStripMenuItem.Click += new System.EventHandler(this.circleToolStripMenuItem_Click);
+            // 
+            // squareToolStripMenuItem
+            // 
+            this.squareToolStripMenuItem.Image = global::Shapes.Properties.Resources.icons8_maximize_button_96;
+            this.squareToolStripMenuItem.Name = "squareToolStripMenuItem";
+            this.squareToolStripMenuItem.Size = new System.Drawing.Size(359, 44);
+            this.squareToolStripMenuItem.Text = "Square";
+            this.squareToolStripMenuItem.Click += new System.EventHandler(this.squareToolStripMenuItem_Click);
+            // 
+            // triangleToolStripMenuItem
+            // 
+            this.triangleToolStripMenuItem.Image = global::Shapes.Properties.Resources.icons8_triangle_96;
+            this.triangleToolStripMenuItem.Name = "triangleToolStripMenuItem";
+            this.triangleToolStripMenuItem.Size = new System.Drawing.Size(359, 44);
+            this.triangleToolStripMenuItem.Text = "Triangle";
+            this.triangleToolStripMenuItem.Click += new System.EventHandler(this.triangleToolStripMenuItem_Click);
+            // 
             // toolStrip1
             // 
             this.toolStrip1.ImageScalingSize = new System.Drawing.Size(32, 32);
@@ -216,29 +242,6 @@
             this.stopButton.Size = new System.Drawing.Size(46, 36);
             this.stopButton.Text = "stopButton";
             this.stopButton.Click += new System.EventHandler(this.stopButton_Click);
-            // 
-            // circleToolStripMenuItem
-            // 
-            this.circleToolStripMenuItem.Checked = true;
-            this.circleToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.circleToolStripMenuItem.Name = "circleToolStripMenuItem";
-            this.circleToolStripMenuItem.Size = new System.Drawing.Size(359, 44);
-            this.circleToolStripMenuItem.Text = "Circle";
-            this.circleToolStripMenuItem.Click += new System.EventHandler(this.circleToolStripMenuItem_Click);
-            // 
-            // squareToolStripMenuItem
-            // 
-            this.squareToolStripMenuItem.Name = "squareToolStripMenuItem";
-            this.squareToolStripMenuItem.Size = new System.Drawing.Size(359, 44);
-            this.squareToolStripMenuItem.Text = "Square";
-            this.squareToolStripMenuItem.Click += new System.EventHandler(this.squareToolStripMenuItem_Click);
-            // 
-            // triangleToolStripMenuItem
-            // 
-            this.triangleToolStripMenuItem.Name = "triangleToolStripMenuItem";
-            this.triangleToolStripMenuItem.Size = new System.Drawing.Size(359, 44);
-            this.triangleToolStripMenuItem.Text = "Triangle";
-            this.triangleToolStripMenuItem.Click += new System.EventHandler(this.triangleToolStripMenuItem_Click);
             // 
             // Main
             // 
