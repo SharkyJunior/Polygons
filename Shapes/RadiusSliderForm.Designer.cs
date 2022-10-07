@@ -35,24 +35,26 @@
             // 
             // radiusTrackBar
             // 
-            this.radiusTrackBar.Location = new System.Drawing.Point(12, 12);
+            this.radiusTrackBar.Location = new System.Drawing.Point(24, 23);
+            this.radiusTrackBar.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
             this.radiusTrackBar.Maximum = 30;
             this.radiusTrackBar.Minimum = 5;
             this.radiusTrackBar.Name = "radiusTrackBar";
-            this.radiusTrackBar.Size = new System.Drawing.Size(207, 45);
+            this.radiusTrackBar.Size = new System.Drawing.Size(414, 90);
             this.radiusTrackBar.TabIndex = 0;
             this.radiusTrackBar.TickStyle = System.Windows.Forms.TickStyle.Both;
             this.radiusTrackBar.Value = 5;
-            this.radiusTrackBar.Scroll += new System.EventHandler(this.radiusTrackBar_Scroll);
             this.radiusTrackBar.ValueChanged += new System.EventHandler(this.radiusTrackBar_ValueChanged);
+            this.radiusTrackBar.MouseUp += new System.Windows.Forms.MouseEventHandler(this.radiusTrackBar_MouseUp);
             // 
             // RadiusSliderForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(230, 60);
+            this.ClientSize = new System.Drawing.Size(464, 115);
             this.Controls.Add(this.radiusTrackBar);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
             this.Name = "RadiusSliderForm";
             this.Text = "Radius";
             this.Load += new System.EventHandler(this.RadiusSliderForm_Load);

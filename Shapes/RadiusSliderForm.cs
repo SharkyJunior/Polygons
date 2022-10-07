@@ -30,24 +30,24 @@ namespace Shapes
             this.FormBorderStyle = FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
             this.MinimizeBox = true;
-            radiusTrackBar.Value = mainForm.VertexRadius;
-        }
-
-        private void radiusTrackBar_Scroll(object sender, EventArgs e)
-        {
-
+            
         }
 
         private void RadiusSliderForm_Load(object sender, EventArgs e)
         {
-
+            radiusTrackBar.Value = mainForm.vertexRadius;
         }
 
         private void radiusTrackBar_ValueChanged(object sender, EventArgs e)
         {
-            mainForm.VertexRadius = radiusTrackBar.Value;
-            mainForm.SaveCurrentState();
+            mainForm.vertexRadius = radiusTrackBar.Value;
             mainForm.Refresh();
+        }
+
+        private void radiusTrackBar_MouseUp(object sender, MouseEventArgs e)
+        {
+            if (vertexRadius != radiusTrackBar.Value)
+                mainForm.SaveCurrentState();
         }
     }
 }

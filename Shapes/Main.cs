@@ -14,49 +14,56 @@ namespace Shapes
 {
     public partial class Main : Form
     {
-        List<Shape> shapes = new List<Shape>();
-        bool isDragging = false;
-        bool isDynamic = false;
-        bool isSaved = false;
-        string FILE_PATH = null;
+        #region Fields
+
+        List<Shape> shapes;
+        bool isDragging, isDynamic, isSaved;
+        string FILE_PATH;
         const string FILE_FILTER = "polygon files (*.polygon)|*.polygon";
         Buffer buffer; 
 
+        public int vertexRadius { get; set; }
 
-        private int vertexRadius = 10;
+        Color linesColor, innerColor, vertexesColor;
 
-        public int VertexRadius
-        {
-            get => vertexRadius;
-            set => vertexRadius = value;
-        }
+        Random random;
 
-        Color linesColor = Color.OliveDrab;
-        Color innerColor = Color.Honeydew;
-        Color vertexesColor = Color.FromArgb(192, Color.ForestGreen);
+        RadiusSliderForm radiusSliderForm;
 
-        Random random = new Random();
+        #endregion
 
+        #region Constructor
         public Main()
         {
             InitializeComponent();
+
+            shapes = new List<Shape>();
             KeyPreview = true;
             buffer = new Buffer();
+            linesColor = Color.OliveDrab;
+            innerColor = Color.Honeydew;
+            vertexesColor = Color.FromArgb(192, Color.ForestGreen);
+            vertexRadius = 10;
+            isDragging = false;
+            isDynamic = false;
+            isSaved = false;
+            FILE_PATH = null;
+            random = new Random();
+            radiusSliderForm = new RadiusSliderForm(this);
+
             SaveCurrentState();
             UpdateTitle(false);
+            Refresh();
         }
 
-        private void Form1_Load(object sender, EventArgs e)
-        {
-            
-        }
-
+        #endregion Constructor
         private void Form1_Paint(object sender, PaintEventArgs e)
         {
             using (var g = CreateGraphics())
             {
                 g.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.HighQuality;
                 Shape.radius = vertexRadius;
+                Shape.color = vertexesColor;
 
                 if (shapes.Count > 0 && !isDynamic)
                     playButton.Enabled = true;
@@ -147,7 +154,8 @@ namespace Shapes
         private void Form1_MouseUp(object sender, MouseEventArgs e)
         {
             //Debug.WriteLine("mouse up");
-            SaveCurrentState();
+            if (!isDynamic)
+                SaveCurrentState();
             isDragging = false;
             foreach (Shape shape in shapes)
                 shape.isDragged = false;
@@ -176,8 +184,8 @@ namespace Shapes
             if (colorDialog.ShowDialog() == DialogResult.OK)
             {
                SaveCurrentState();
-               vertexesColor = Color.FromArgb(192, colorDialog.Color);
-               Shape.color = vertexesColor;
+               vertexesColor = colorDialog.Color;
+               SaveCurrentState();
             }
             Refresh();
         }
@@ -191,6 +199,7 @@ namespace Shapes
             {
                 SaveCurrentState();
                 linesColor = colorDialog.Color;
+                SaveCurrentState();
             }
             Refresh();
         }
@@ -204,7 +213,8 @@ namespace Shapes
             {
                 SaveCurrentState();
                 innerColor = colorDialog.Color;
-            }
+                SaveCurrentState();
+            } 
             Refresh();
         }
 
@@ -228,7 +238,6 @@ namespace Shapes
 
         private void playButton_Click(object sender, EventArgs e)
         {
-            SaveCurrentState();
             playButton.Enabled = false;
             stopButton.Enabled = true;
             isDynamic = true;
@@ -246,8 +255,12 @@ namespace Shapes
 
         private void vertexRadiusToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            RadiusSliderForm radiusSliderForm = new RadiusSliderForm(this);
+            if (radiusSliderForm.IsDisposed == true)
+                radiusSliderForm = new RadiusSliderForm(this);
+
             radiusSliderForm.Show();
+            radiusSliderForm.WindowState = FormWindowState.Normal;
+            radiusSliderForm.Select();
         }
 
         //TODO: refactor newFileEvent
@@ -436,10 +449,10 @@ namespace Shapes
         {
             this.shapes = Utilities.CopyFrom(shapes);
             this.vertexRadius = vertexRadius;
-            this.innerColor = innerColor;
-            this.linesColor = linesColor;
-            this.vertexesColor = vertexesColor;
-            Shape.color = Color.FromArgb(192, vertexesColor);
+            this.innerColor = Utilities.CopyColor(innerColor);
+            this.linesColor = Utilities.CopyColor(linesColor);
+            this.vertexesColor = Utilities.CopyColor(vertexesColor);
+            radiusSliderForm.radiusTrackBar.Value = vertexRadius;
             UpdateTitle(false);
             Refresh();
         }
@@ -454,7 +467,7 @@ namespace Shapes
             linesColor = Color.OliveDrab;
             innerColor = Color.Honeydew;
             vertexesColor = Color.ForestGreen;
-            Shape.color = Color.FromArgb(192, vertexesColor);
+            Shape.color = vertexesColor;
             SaveCurrentState();
         }
 

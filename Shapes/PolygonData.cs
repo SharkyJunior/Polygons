@@ -14,7 +14,7 @@ namespace Shapes
     public class PolygonData
     {
         private readonly List<Shape> shapes;
-        public int innerColor, linesColor, vertexesColor, radius;
+        public readonly int innerColor, linesColor, vertexesColor, radius;
 
         public List<Shape> Shapes => shapes;
 
@@ -31,10 +31,11 @@ namespace Shapes
         public PolygonData(List<Shape> shapes, Color innerColor, Color linesColor, Color vertexesColor, int radius)
         {
             this.shapes = Utilities.CopyFrom(shapes);
-            this.innerColor = innerColor.ToArgb();
-            this.linesColor = linesColor.ToArgb();
-            this.vertexesColor = vertexesColor.ToArgb();
+            this.innerColor = Utilities.CopyColor(innerColor).ToArgb();
+            this.linesColor = Utilities.CopyColor(linesColor).ToArgb();
+            this.vertexesColor = Utilities.CopyColor(vertexesColor).ToArgb();
             this.radius = radius;
+
         }
     }
 }

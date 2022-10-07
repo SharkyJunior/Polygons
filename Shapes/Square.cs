@@ -40,6 +40,7 @@ namespace Shapes
         {
             Brush brush = new SolidBrush(color);
             Pen pen = new Pen(color, 2);
+            rectSide = (float)(radius * Math.Sin(Utilities.ToRadians(45)) * 2);
             g.FillRectangle(new SolidBrush(Color.FromArgb(192, color)), X - rectSide / 2, Y - rectSide / 2, rectSide, rectSide);
             g.DrawRectangle(pen, X - rectSide / 2, Y - rectSide / 2, rectSide, rectSide);
         }

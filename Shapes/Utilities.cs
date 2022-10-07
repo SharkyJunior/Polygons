@@ -49,7 +49,7 @@ namespace Shapes
 
             for (int i = 0; i < points.Count; i++)
             {
-                while (convexHull.Count >= 2 && Orientation(convexHull[convexHull.Count - 2], convexHull[convexHull.Count - 1], points[i]) == -1)
+                while (convexHull.Count >= 2 && Orientation(convexHull[convexHull.Count - 2], convexHull[convexHull.Count - 1], points[i]) != 1)
                     convexHull.Remove(convexHull.Last());
                 convexHull.Add(points[i]);
             }
@@ -64,7 +64,7 @@ namespace Shapes
 
             for (int i = 0; i < points.Count; i++)
             {
-                while (convexHull.Count >= 2 && Orientation(convexHull[convexHull.Count - 2], convexHull[convexHull.Count - 1], points[i]) == -1)
+                while (convexHull.Count >= 2 && Orientation(convexHull[convexHull.Count - 2], convexHull[convexHull.Count - 1], points[i]) != 1)
                     convexHull.Remove(convexHull.Last());
                 convexHull.Add(points[i]);
             }
@@ -74,7 +74,7 @@ namespace Shapes
         // to determine starting point of a Graham scan
         static private Shape FindGreatestY(List<Shape> shapes)
         {
-            return new List<Shape>(shapes.OrderBy(shape => -shape.Y))[0];
+            return new List<Shape>(shapes.OrderBy(shape => -shape.Y).ThenByDescending(shape => shape.X))[0];
         }
 
         //sorting all the points by angle between horizontal line through greatest Y point and point. (counter clockwise)
@@ -83,7 +83,7 @@ namespace Shapes
             Shape greatestYshape = FindGreatestY(shapes);
 
             //sorting firstly by polar angle (relative to greatest Y point) counter-clockwise, then by distance between points (if points are collinear)
-            return new List<Shape>(shapes.OrderBy(shape => -Math.Atan2(greatestYshape.Y - shape.Y, greatestYshape.X - shape.X)).ThenBy(shape => DistanceBetweenPoints(shape.X, shape.Y, greatestYshape.X, greatestYshape.Y)).ToList()); 
+            return new List<Shape>(shapes.OrderBy(shape => -Math.Atan2(greatestYshape.Y - shape.Y, greatestYshape.X - shape.X)).ThenByDescending(shape => DistanceBetweenPoints(shape.X, shape.Y, greatestYshape.X, greatestYshape.Y)).ToList()); 
         }
 
         static private int Orientation(Shape pointBeforeLast, Shape lastPoint, Shape nextPoint)
@@ -106,6 +106,11 @@ namespace Shapes
                 copied.Add(shape.Copy());
             }
             return copied;
+        }
+
+        public static Color CopyColor(Color color)
+        {
+            return Color.FromArgb(color.A, color.R, color.G, color.B);
         }
     }
 }

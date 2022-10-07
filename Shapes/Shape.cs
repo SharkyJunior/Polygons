@@ -14,6 +14,7 @@ namespace Shapes
     [XmlInclude(typeof(Circle)), XmlInclude(typeof(Square)), XmlInclude(typeof(Triangle))]
     public abstract class Shape
     {
+        #region Fields & Properties
         [XmlIgnore]
         public int offsetX, offsetY;
 
@@ -29,6 +30,9 @@ namespace Shapes
         [XmlIgnore]
         public static int radius { get; set; }
 
+        #endregion
+
+        #region Methods
         public abstract void Draw(Graphics g);
 
         public abstract bool IsInside(int mouseX, int mouseY);
@@ -47,5 +51,6 @@ namespace Shapes
             X = newMouseX - offsetX;
             Y = newMouseY - offsetY;
         }
+        #endregion 
     }
 }
