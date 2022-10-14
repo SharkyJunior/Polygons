@@ -65,7 +65,7 @@ namespace Shapes
             //Debug.WriteLine("");
             // end debug
 
-            if (currentState >= 0)
+            if (currentState - 1 >= 0)
                 currentState--;
 
             //start debug

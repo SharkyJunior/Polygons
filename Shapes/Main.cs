@@ -46,13 +46,12 @@ namespace Shapes
             vertexRadius = 10;
             isDragging = false;
             isDynamic = false;
-            isSaved = false;
+            isSaved = true;
             FILE_PATH = null;
             random = new Random();
             radiusSliderForm = new RadiusSliderForm(this);
 
             SaveCurrentState();
-            UpdateTitle(false);
             Refresh();
         }
 
@@ -81,8 +80,6 @@ namespace Shapes
                 {
                     shape.Draw(g);
                 }
-
-                UpdateTitle(false);
             }
         }
         private void Form1_MouseDown(object sender, MouseEventArgs e)
@@ -154,8 +151,11 @@ namespace Shapes
         private void Form1_MouseUp(object sender, MouseEventArgs e)
         {
             //Debug.WriteLine("mouse up");
-            if (!isDynamic)
+            if (!isDynamic) {
                 SaveCurrentState();
+                UpdateTitle(false);
+                isSaved = false;
+            }
             isDragging = false;
             foreach (Shape shape in shapes)
                 shape.isDragged = false;
@@ -186,6 +186,8 @@ namespace Shapes
                SaveCurrentState();
                vertexesColor = colorDialog.Color;
                SaveCurrentState();
+               isSaved = false;
+               UpdateTitle(false);
             }
             Refresh();
         }
@@ -200,6 +202,8 @@ namespace Shapes
                 SaveCurrentState();
                 linesColor = colorDialog.Color;
                 SaveCurrentState();
+                isSaved = false;
+                UpdateTitle(false);
             }
             Refresh();
         }
@@ -214,6 +218,8 @@ namespace Shapes
                 SaveCurrentState();
                 innerColor = colorDialog.Color;
                 SaveCurrentState();
+                isSaved = false;
+                UpdateTitle(false);
             } 
             Refresh();
         }
@@ -232,7 +238,7 @@ namespace Shapes
                 }
                 Utilities.GrahamScan(ref shapes);
                 Refresh();
-                await Task.Delay(50);
+                await Task.Delay(25);
             }
         }
 
@@ -247,6 +253,9 @@ namespace Shapes
         private void stopButton_Click(object sender, EventArgs e)
         {
             SaveCurrentState();
+            isSaved = false;
+            UpdateTitle(false);
+
             playButton.Enabled = true;
             stopButton.Enabled = false;
             isDynamic = false;
@@ -264,6 +273,7 @@ namespace Shapes
         }
 
         //TODO: refactor newFileEvent
+        //TODO: compare saved state with the current and update title
         #region SaveLoad 
         private void newToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -316,20 +326,14 @@ namespace Shapes
         {
             if (FILE_PATH == null)
             {
-                DialogResult dlgRes = DialogResult.No;
-                dlgRes = MessageBox.Show("Do you want to save changes?", "Polygons", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
-                switch (dlgRes)
+                DialogResult dr = CallSaveWindow();
+                if (dr == DialogResult.OK) 
                 {
-                    case DialogResult.Yes:
-                        DialogResult dr = CallSaveWindow();
-                        if (dr == DialogResult.OK)
-                            UpdateTitle(true);
-                        else
-                            UpdateTitle(false);
-                        break;
-                    case DialogResult.No:
-                        break;
+                    UpdateTitle(true);
+                    isSaved = true;
                 }
+                else
+                    UpdateTitle(false);
             }
             else
             {
@@ -337,23 +341,18 @@ namespace Shapes
                 {
                     XmlOperations.SaveToXml(FILE_PATH, new PolygonData(shapes, innerColor, linesColor, vertexesColor, vertexRadius));
                     UpdateTitle(true);
+                    isSaved = true;
                 }
                 catch
                 {
-                    DialogResult dlgRes = DialogResult.No;
-                    dlgRes = MessageBox.Show("Do you want to save changes?", "Polygons", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
-                    switch (dlgRes)
+                    DialogResult dr = CallSaveWindow();
+                    if (dr == DialogResult.OK)
                     {
-                        case DialogResult.Yes:
-                            DialogResult dr = CallSaveWindow();
-                            if (dr == DialogResult.OK)
-                                UpdateTitle(true);
-                            else
-                                UpdateTitle(false);
-                            break;
-                        case DialogResult.No:
-                            break;
+                        UpdateTitle(true);
+                        isSaved = true;
                     }
+                    else
+                        UpdateTitle(false);
                 }
             }
         }
@@ -384,6 +383,7 @@ namespace Shapes
                     foreach (Shape shape in shapes)
                         Shape.color = vertexesColor;
                     buffer.Clear();
+                    SaveCurrentState();
                     UpdateTitle(true);
                     Refresh();
                 }
@@ -429,13 +429,15 @@ namespace Shapes
             if (keyData == (Keys.Control | Keys.Z))
             {
                 PolygonData previousState = buffer.RevertToPreviousState();
-                UpdatePolygon(previousState.Shapes, previousState.radius, previousState.InnerColor, previousState.LinesColor, previousState.VertexesColor);
+                UpdatePolygon(previousState.Shapes, previousState.Radius, previousState.InnerColor, previousState.LinesColor, previousState.VertexesColor);
+                isSaved = false;
                 UpdateTitle(false);
             }
             if (keyData == (Keys.Control | Keys.Shift | Keys.Z))
             {
                 PolygonData nextState = buffer.RevertToNextState();
-                UpdatePolygon(nextState.Shapes, nextState.radius, nextState.InnerColor, nextState.LinesColor, nextState.VertexesColor);
+                UpdatePolygon(nextState.Shapes, nextState.Radius, nextState.InnerColor, nextState.LinesColor, nextState.VertexesColor);
+                isSaved = false;
                 UpdateTitle(false);
             }
             return base.ProcessCmdKey(ref msg, keyData);
@@ -473,6 +475,7 @@ namespace Shapes
 
         private void Main_FormClosing(object sender, FormClosingEventArgs e)
         {
+            Debug.WriteLine(isSaved);
             if (!isSaved)
             {
                 DialogResult dlgRes = MessageBox.Show("Do you want to save changes?", "Polygons", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Warning);
@@ -499,7 +502,6 @@ namespace Shapes
                         break;
                 }
             }
-
         }
 
         private void circleToolStripMenuItem_Click(object sender, EventArgs e)
