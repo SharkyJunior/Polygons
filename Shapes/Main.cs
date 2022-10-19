@@ -17,6 +17,8 @@ namespace Shapes
         #region Fields
 
         List<Shape> shapes;
+        PolygonData lastSavedState;
+
         bool isDragging, isDynamic, isSaved;
         string FILE_PATH;
         const string FILE_FILTER = "polygon files (*.polygon)|*.polygon";
@@ -329,6 +331,7 @@ namespace Shapes
                 DialogResult dr = CallSaveWindow();
                 if (dr == DialogResult.OK) 
                 {
+                    lastSavedState = new PolygonData(shapes, innerColor, linesColor, vertexesColor, vertexRadius);
                     UpdateTitle(true);
                     isSaved = true;
                 }
@@ -339,7 +342,9 @@ namespace Shapes
             {
                 try
                 {
-                    XmlOperations.SaveToXml(FILE_PATH, new PolygonData(shapes, innerColor, linesColor, vertexesColor, vertexRadius));
+                    var state = new PolygonData(shapes, innerColor, linesColor, vertexesColor, vertexRadius);
+                    XmlOperations.SaveToXml(FILE_PATH, state);
+                    lastSavedState = state;
                     UpdateTitle(true);
                     isSaved = true;
                 }
@@ -348,6 +353,7 @@ namespace Shapes
                     DialogResult dr = CallSaveWindow();
                     if (dr == DialogResult.OK)
                     {
+                        lastSavedState = new PolygonData(shapes, innerColor, linesColor, vertexesColor, vertexRadius);
                         UpdateTitle(true);
                         isSaved = true;
                     }
@@ -359,8 +365,9 @@ namespace Shapes
 
         private void saveAsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            CallSaveWindow();
-            UpdateTitle(true);
+            DialogResult dr = CallSaveWindow();
+            if (dr == DialogResult.OK)
+                UpdateTitle(true);
         }
 
         private void openToolStripMenuItem_Click(object sender, EventArgs e)
@@ -389,7 +396,6 @@ namespace Shapes
                 }
             }
         }
-
         private DialogResult CallSaveWindow()
         {
             SaveFileDialog saveFileDialog = new SaveFileDialog();
@@ -409,53 +415,25 @@ namespace Shapes
             return DialogResult.Cancel;
         }
 
-        #endregion SaveLoad
-
-        private void UpdateTitle(bool isSaved)
-        {
-            if (FILE_PATH == null)
-                this.Text = "Untitled";
-            else 
-                this.Text = Path.GetFileNameWithoutExtension(FILE_PATH);
-            if (isSaved)
-                this.Text += $" - Polygons";
-            else
-                this.Text += $"* - Polygons";
-
-        }
-
-        protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
-        {
-            if (keyData == (Keys.Control | Keys.Z))
-            {
-                PolygonData previousState = buffer.RevertToPreviousState();
-                UpdatePolygon(previousState.Shapes, previousState.Radius, previousState.InnerColor, previousState.LinesColor, previousState.VertexesColor);
-                isSaved = false;
-                UpdateTitle(false);
-            }
-            if (keyData == (Keys.Control | Keys.Shift | Keys.Z))
-            {
-                PolygonData nextState = buffer.RevertToNextState();
-                UpdatePolygon(nextState.Shapes, nextState.Radius, nextState.InnerColor, nextState.LinesColor, nextState.VertexesColor);
-                isSaved = false;
-                UpdateTitle(false);
-            }
-            return base.ProcessCmdKey(ref msg, keyData);
-        }
         public void SaveCurrentState()
         {
-           buffer.SaveCurrentState(new PolygonData(shapes, innerColor, linesColor, vertexesColor, vertexRadius));
+            buffer.SaveCurrentState(new PolygonData(shapes, innerColor, linesColor, vertexesColor, vertexRadius));
         }
 
-        private void UpdatePolygon(List<Shape> shapes, int vertexRadius, Color innerColor, Color linesColor, Color vertexesColor)
+        private void UpdatePolygon(PolygonData state)
         {
-            this.shapes = Utilities.CopyFrom(shapes);
-            this.vertexRadius = vertexRadius;
-            this.innerColor = Utilities.CopyColor(innerColor);
-            this.linesColor = Utilities.CopyColor(linesColor);
-            this.vertexesColor = Utilities.CopyColor(vertexesColor);
-            radiusSliderForm.radiusTrackBar.Value = vertexRadius;
-            UpdateTitle(false);
+            this.shapes = Utilities.CopyFrom(state.Shapes);
+            this.vertexRadius = state.Radius;
+            this.innerColor = Utilities.CopyColor(state.InnerColor);
+            this.linesColor = Utilities.CopyColor(state.LinesColor);
+            this.vertexesColor = Utilities.CopyColor(state.VertexesColor);
+            radiusSliderForm.radiusTrackBar.Value = state.Radius;
+            
+            if (!state.Equals(lastSavedState))
+                UpdateTitle(false);
+            else
+                UpdateTitle(true);
+
             Refresh();
         }
 
@@ -503,6 +481,39 @@ namespace Shapes
                 }
             }
         }
+
+        #endregion SaveLoad
+
+        private void UpdateTitle(bool isSaved)
+        {
+            if (FILE_PATH == null)
+                this.Text = "Untitled";
+            else 
+                this.Text = Path.GetFileNameWithoutExtension(FILE_PATH);
+            if (isSaved)
+                this.Text += $" - Polygons";
+            else
+                this.Text += $"* - Polygons";
+
+        }
+
+        protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
+        {
+            if (keyData == (Keys.Control | Keys.Z))
+            {
+                PolygonData previousState = buffer.RevertToPreviousState();
+                UpdatePolygon(previousState);
+                isSaved = false;
+            }
+            if (keyData == (Keys.Control | Keys.Shift | Keys.Z))
+            {
+                PolygonData nextState = buffer.RevertToNextState();
+                UpdatePolygon(nextState);
+                isSaved = false;
+            }
+            return base.ProcessCmdKey(ref msg, keyData);
+        }
+
 
         private void circleToolStripMenuItem_Click(object sender, EventArgs e)
         {

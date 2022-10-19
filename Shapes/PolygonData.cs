@@ -23,12 +23,14 @@ namespace Shapes
         public Color VertexesColor => Color.FromArgb(vertexesColor);
 
         public int Radius => radius;
+
         public PolygonData()
         {
             this.shapes = new List<Shape>();
             this.innerColor = new Color().ToArgb();
             this.linesColor = new Color().ToArgb();
         }
+
         public PolygonData(List<Shape> shapes, Color innerColor, Color linesColor, Color vertexesColor, int radius)
         {
             this.shapes = Utilities.CopyFrom(shapes);
