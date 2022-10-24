@@ -75,7 +75,6 @@ namespace Shapes
                     List<Point> hull = Utilities.ConvertShapesToPoints(Utilities.GrahamScan(shapes));
                     g.FillPolygon(new SolidBrush(innerColor), hull.ToArray());
                     g.DrawPolygon(new Pen(linesColor, 2), hull.ToArray());
-
                 }
 
                 foreach (Shape shape in shapes)
