@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Drawing;
+using System.Threading;
+using System.Xml.Schema;
 
 namespace Shapes
 {
@@ -97,6 +99,62 @@ namespace Shapes
 
         #endregion
 
+        #region Line Scan Convex Hull
+
+        public static void DrawConvexHullByDef(Graphics g, Color linesColor, List<Shape> shapes)
+        {
+            LineFunction lineFunc;
+
+            int minX = shapes[0].X, maxX = shapes[0].X;
+            foreach (Shape shape in shapes)
+            {
+                if (minX > shape.X)
+                    minX = shape.X;
+                if (maxX < shape.X)
+                    maxX = shape.X;
+            }
+
+            for (int i = 0; i < shapes.Count; i++)
+            {
+                for (int n = i + 1; n < shapes.Count; n++)
+                {
+                    lineFunc = new LineFunction(shapes[i].X, shapes[i].Y, shapes[n].X, shapes[n].Y);
+                    int aboveCount = 0, belowCount = 0;
+                    bool lineInHull = true;
+                    bool equalX = false;
+                    if (shapes[i].X == shapes[n].X)
+                        equalX = true;
+                    foreach (Shape shape in shapes)
+                    {
+                        if (shape != shapes[i] && shape != shapes[n])
+                        {
+                            var newY = lineFunc.k * shape.X + lineFunc.b;
+                            
+                            if (newY > shape.Y)
+                                belowCount++;
+                            else if (newY < shape.Y)
+                                aboveCount++;
+
+                            if ((aboveCount > 0 && belowCount > 0) || (equalX && shapes[i].X != minX && shapes[i].X != maxX))
+                            {
+                                lineInHull = false;
+                                break;
+                            }
+                            
+                        }
+                    }
+
+                    if (lineInHull)
+                    {
+                        g.DrawLine(new Pen(linesColor, 2), shapes[i].X, shapes[i].Y, shapes[n].X, shapes[n].Y);
+                   
+                    }
+                }
+
+            }
+        }
+        #endregion 
+
         // for getting rid of unnecessary references
         public static List<Shape> CopyFrom(List<Shape> shapes)
         {
@@ -112,5 +170,23 @@ namespace Shapes
         {
             return Color.FromArgb(color.A, color.R, color.G, color.B);
         }
+
+        protected struct LineFunction
+        {
+            public double k, b;
+
+            LineFunction(double k, double b)
+            {
+                this.k = k;
+                this.b = b;
+            }
+
+            public LineFunction(int x1, int y1, int x2, int y2)
+            {
+                this.k = (double)(y2 - y1) / (double)(x2 - x1);
+                this.b = y1 - k * x1;
+            }
+        }
     }
 }
+

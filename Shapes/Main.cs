@@ -39,6 +39,7 @@ namespace Shapes
         {
             InitializeComponent();
 
+            DoubleBuffered = true;
             shapes = new List<Shape>();
             KeyPreview = true;
             buffer = new Buffer();
@@ -60,27 +61,33 @@ namespace Shapes
         #endregion Constructor
         private void Form1_Paint(object sender, PaintEventArgs e)
         {
-            using (var g = CreateGraphics())
+            var g = e.Graphics;
+            
+            g.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.HighQuality;
+            Shape.radius = vertexRadius;
+            Shape.color = vertexesColor;
+
+            if (shapes.Count > 0 && !isDynamic)
+                playButton.Enabled = true;
+            else playButton.Enabled = false;
+
+            if (shapes.Count > 2)
             {
-                g.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.HighQuality;
-                Shape.radius = vertexRadius;
-                Shape.color = vertexesColor;
-
-                if (shapes.Count > 0 && !isDynamic)
-                    playButton.Enabled = true;
-                else playButton.Enabled = false;
-
-                if (shapes.Count > 2)
+                if (algorithmByDefinitionToolStripMenuItem.Checked)
+                {
+                    Utilities.DrawConvexHullByDef(g, linesColor, shapes);
+                }
+                else
                 {
                     List<Point> hull = Utilities.ConvertShapesToPoints(Utilities.GrahamScan(shapes));
                     g.FillPolygon(new SolidBrush(innerColor), hull.ToArray());
                     g.DrawPolygon(new Pen(linesColor, 2), hull.ToArray());
                 }
+            }
 
-                foreach (Shape shape in shapes)
-                {
-                    shape.Draw(g);
-                }
+            foreach (Shape shape in shapes)
+            {
+                shape.Draw(g);
             }
         }
         private void Form1_MouseDown(object sender, MouseEventArgs e)
@@ -160,7 +167,7 @@ namespace Shapes
             isDragging = false;
             foreach (Shape shape in shapes)
                 shape.isDragged = false;
-            if (shapes.Count > 2)
+            if (shapes.Count > 2 && grahamScanToolStripMenuItem.Checked)
                 Utilities.GrahamScan(ref shapes);
             Refresh();
         }
@@ -494,6 +501,18 @@ namespace Shapes
             else
                 this.Text += $"* - Polygons";
 
+        }
+
+        private void algorithmByDefinitionToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            algorithmByDefinitionToolStripMenuItem.Checked = true;
+            grahamScanToolStripMenuItem.Checked = false;
+        }
+
+        private void grahamScanToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            grahamScanToolStripMenuItem.Checked = true;
+            algorithmByDefinitionToolStripMenuItem.Checked = false;
         }
 
         protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
