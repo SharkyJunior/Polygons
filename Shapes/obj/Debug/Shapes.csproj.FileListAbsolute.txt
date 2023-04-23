@@ -27,3 +27,15 @@ C:\00\Polygons\Shapes\obj\Debug\Shapes.csproj.SuggestedBindingRedirects.cache
 C:\00\Polygons\Shapes\obj\Debug\Shapes.exe
 C:\00\Polygons\Shapes\obj\Debug\Shapes.pdb
 D:\ДЗ\Polygons\Shapes\obj\Debug\Shapes.ComparisonChartForm.resources
+\\Mac\Home\Documents\GitHub\Polygons\Shapes\bin\Debug\Shapes.exe.config
+\\Mac\Home\Documents\GitHub\Polygons\Shapes\bin\Debug\Shapes.exe
+\\Mac\Home\Documents\GitHub\Polygons\Shapes\bin\Debug\Shapes.pdb
+\\Mac\Home\Documents\GitHub\Polygons\Shapes\obj\Debug\Shapes.csproj.AssemblyReference.cache
+\\Mac\Home\Documents\GitHub\Polygons\Shapes\obj\Debug\Shapes.csproj.SuggestedBindingRedirects.cache
+\\Mac\Home\Documents\GitHub\Polygons\Shapes\obj\Debug\Shapes.Main.resources
+\\Mac\Home\Documents\GitHub\Polygons\Shapes\obj\Debug\Shapes.Properties.Resources.resources
+\\Mac\Home\Documents\GitHub\Polygons\Shapes\obj\Debug\Shapes.RadiusSliderForm.resources
+\\Mac\Home\Documents\GitHub\Polygons\Shapes\obj\Debug\Shapes.csproj.GenerateResource.cache
+\\Mac\Home\Documents\GitHub\Polygons\Shapes\obj\Debug\Shapes.csproj.CoreCompileInputs.cache
+\\Mac\Home\Documents\GitHub\Polygons\Shapes\obj\Debug\Shapes.exe
+\\Mac\Home\Documents\GitHub\Polygons\Shapes\obj\Debug\Shapes.pdb

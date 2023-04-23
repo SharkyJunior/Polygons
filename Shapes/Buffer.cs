@@ -19,6 +19,7 @@ namespace Shapes
             currentState = -1;
         }
 
+        public int CurrentState => currentState;
         public void SaveCurrentState(PolygonData state)
         {
             // start debug

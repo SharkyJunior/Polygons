@@ -21,7 +21,7 @@ namespace Shapes
 
         bool isDragging, isDynamic, isSaved;
         string FILE_PATH;
-        const string FILE_FILTER = "polygon files (*.polygon)|*.polygon";
+        const string FILE_FILTER = "polygon files (*.plg)|*.plg";
         Buffer buffer; 
 
         public int vertexRadius { get; set; }
@@ -381,7 +381,7 @@ namespace Shapes
             using (var openFileDialog = new OpenFileDialog())
             {
                 openFileDialog.Filter = FILE_FILTER;
-                openFileDialog.DefaultExt = "polygon";
+                openFileDialog.DefaultExt = "plg";
                 openFileDialog.AddExtension = true;
                 openFileDialog.RestoreDirectory = true;
 
@@ -407,10 +407,10 @@ namespace Shapes
             SaveFileDialog saveFileDialog = new SaveFileDialog();
 
             saveFileDialog.Filter = FILE_FILTER;
-            saveFileDialog.DefaultExt = "polygon";
+            saveFileDialog.DefaultExt = "plg";
             saveFileDialog.AddExtension = true;
             saveFileDialog.RestoreDirectory = true;
-            saveFileDialog.FileName += "Untitled.polygon";
+            saveFileDialog.FileName += "Untitled.plg";
 
             if (saveFileDialog.ShowDialog() == DialogResult.OK)
             {
@@ -496,8 +496,8 @@ namespace Shapes
                 this.Text = "Untitled";
             else 
                 this.Text = Path.GetFileNameWithoutExtension(FILE_PATH);
-            if (isSaved)
-                this.Text += $" - Polygons";
+            if (isSaved || buffer.CurrentState == 0)
+                this.Text += $" - Polygons"; 
             else
                 this.Text += $"* - Polygons";
 
@@ -513,6 +513,11 @@ namespace Shapes
         {
             grahamScanToolStripMenuItem.Checked = true;
             algorithmByDefinitionToolStripMenuItem.Checked = false;
+        }
+
+        private void Main_Load(object sender, EventArgs e)
+        {
+
         }
 
         protected override bool ProcessCmdKey(ref Message msg, Keys keyData)

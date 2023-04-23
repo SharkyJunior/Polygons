@@ -148,21 +148,21 @@
             // vertexesColorToolStripMenuItem
             // 
             this.vertexesColorToolStripMenuItem.Name = "vertexesColorToolStripMenuItem";
-            this.vertexesColorToolStripMenuItem.Size = new System.Drawing.Size(165, 22);
+            this.vertexesColorToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.vertexesColorToolStripMenuItem.Text = "Vertexes color...";
             this.vertexesColorToolStripMenuItem.Click += new System.EventHandler(this.vertexesColorToolStripMenuItem_Click);
             // 
             // linesColorToolStripMenuItem
             // 
             this.linesColorToolStripMenuItem.Name = "linesColorToolStripMenuItem";
-            this.linesColorToolStripMenuItem.Size = new System.Drawing.Size(165, 22);
+            this.linesColorToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.linesColorToolStripMenuItem.Text = "Lines color...";
             this.linesColorToolStripMenuItem.Click += new System.EventHandler(this.linesColorToolStripMenuItem_Click);
             // 
             // innerAreaColorToolStripMenuItem
             // 
             this.innerAreaColorToolStripMenuItem.Name = "innerAreaColorToolStripMenuItem";
-            this.innerAreaColorToolStripMenuItem.Size = new System.Drawing.Size(165, 22);
+            this.innerAreaColorToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.innerAreaColorToolStripMenuItem.Text = "Inner area color...";
             this.innerAreaColorToolStripMenuItem.Click += new System.EventHandler(this.innerAreaColorToolStripMenuItem_Click);
             // 
@@ -197,7 +197,7 @@
             this.circleToolStripMenuItem.Image = global::Shapes.Properties.Resources.icons8_circle_96;
             this.circleToolStripMenuItem.Name = "circleToolStripMenuItem";
             this.circleToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.D1)));
-            this.circleToolStripMenuItem.Size = new System.Drawing.Size(155, 22);
+            this.circleToolStripMenuItem.Size = new System.Drawing.Size(196, 38);
             this.circleToolStripMenuItem.Text = "Circle";
             this.circleToolStripMenuItem.Click += new System.EventHandler(this.circleToolStripMenuItem_Click);
             // 
@@ -206,7 +206,7 @@
             this.squareToolStripMenuItem.Image = global::Shapes.Properties.Resources.icons8_maximize_button_96;
             this.squareToolStripMenuItem.Name = "squareToolStripMenuItem";
             this.squareToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.D2)));
-            this.squareToolStripMenuItem.Size = new System.Drawing.Size(155, 22);
+            this.squareToolStripMenuItem.Size = new System.Drawing.Size(196, 38);
             this.squareToolStripMenuItem.Text = "Square";
             this.squareToolStripMenuItem.Click += new System.EventHandler(this.squareToolStripMenuItem_Click);
             // 
@@ -215,7 +215,7 @@
             this.triangleToolStripMenuItem.Image = global::Shapes.Properties.Resources.icons8_triangle_96;
             this.triangleToolStripMenuItem.Name = "triangleToolStripMenuItem";
             this.triangleToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.D3)));
-            this.triangleToolStripMenuItem.Size = new System.Drawing.Size(155, 22);
+            this.triangleToolStripMenuItem.Size = new System.Drawing.Size(196, 38);
             this.triangleToolStripMenuItem.Text = "Triangle";
             this.triangleToolStripMenuItem.Click += new System.EventHandler(this.triangleToolStripMenuItem_Click);
             // 
@@ -305,6 +305,7 @@
             this.Name = "Main";
             this.Text = "Polygons";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Main_FormClosing);
+            this.Load += new System.EventHandler(this.Main_Load);
             this.Paint += new System.Windows.Forms.PaintEventHandler(this.Form1_Paint);
             this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Form1_MouseDown);
             this.MouseMove += new System.Windows.Forms.MouseEventHandler(this.Form1_MouseMove);
